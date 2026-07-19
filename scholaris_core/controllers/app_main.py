@@ -24,11 +24,11 @@ from odoo.addons.portal.controllers.web import Home as home
 from odoo.http import request
 
 
-class OpeneducatHome(home):
+class ScholarisHome(home):
 
     @http.route()
     def web_login(self, redirect=None, *args, **kw):
-        response = super(OpeneducatHome, self).web_login(
+        response = super(ScholarisHome, self).web_login(
             redirect=redirect, *args, **kw)
         if not redirect and request.params['login_success']:
             if request.env['res.users'].browse(request.uid).has_group(
@@ -44,7 +44,7 @@ class OpeneducatHome(home):
 
     def _login_redirect(self, uid, redirect=None):
         if redirect:
-            return super(OpeneducatHome, self)._login_redirect(uid, redirect)
+            return super(ScholarisHome, self)._login_redirect(uid, redirect)
         if request.env.user.is_parent:
             return '/my/child'
         return '/my'

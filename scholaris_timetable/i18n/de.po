@@ -126,7 +126,7 @@ msgstr ""
 
 #. module: scholaris_timetable
 #: model_terms:ir.ui.view,arch_db:scholaris_timetable.res_config_settings_view_form_timetable
-msgid "<span class=\"fa fa-info-circle\" title=\"Openeducat Enterprise Module\"/>"
+msgid "<span class=\"fa fa-info-circle\" title=\"Scholaris Enterprise Module\"/>"
 msgstr "<span class = \"fa fa-info-circle\" title = \"Scholariscat Enterprise Modul\"/>"
 
 #. module: scholaris_timetable
@@ -696,7 +696,7 @@ msgstr "Anzahl der Nachrichten mit Lieferfehler"
 #. module: scholaris_timetable
 #: model:ir.model,name:scholaris_timetable.model_op_faculty
 msgid "Scholaris Faculty"
-msgstr "Openeducat -Fakultät"
+msgstr "Scholaris -Fakultät"
 
 #. module: scholaris_timetable
 #: model:ir.model.fields.selection,name:scholaris_timetable.selection__op_timing__am_pm__pm

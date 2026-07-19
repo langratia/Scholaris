@@ -46,12 +46,12 @@ msgstr ""
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core
-msgid "<span class=\"fa fa-info-circle \" title=\"Openeducat Enterprise Module\"/>"
+msgid "<span class=\"fa fa-info-circle \" title=\"Scholaris Enterprise Module\"/>"
 msgstr "<span class =“ fa fa-info-circle” title =“ scholaris企業模塊”/>"
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core
-msgid "<span class=\"fa fa-info-circle\" title=\"Openeducat Enterprise Module\"/>"
+msgid "<span class=\"fa fa-info-circle\" title=\"Scholaris Enterprise Module\"/>"
 msgstr "<span class =“ fa fa-info-circle” title =“ scholaris企業模塊”/>"
 
 #. module: scholaris_core

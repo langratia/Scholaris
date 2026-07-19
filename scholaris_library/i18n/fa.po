@@ -1233,7 +1233,7 @@ msgstr "تعداد پیام ها با خطای تحویل"
 #. module: scholaris_library
 #: model:ir.model,name:scholaris_library.model_op_faculty
 msgid "Scholaris Faculty"
-msgstr "دانشکده Openeducat"
+msgstr "دانشکده Scholaris"
 
 #. module: scholaris_library
 #: model:ir.model.fields,field_description:scholaris_library.field_reserve_media__partner_id

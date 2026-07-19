@@ -46,12 +46,12 @@ msgstr ""
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core
-msgid "<span class=\"fa fa-info-circle \" title=\"Openeducat Enterprise Module\"/>"
+msgid "<span class=\"fa fa-info-circle \" title=\"Scholaris Enterprise Module\"/>"
 msgstr "không"
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core
-msgid "<span class=\"fa fa-info-circle\" title=\"Openeducat Enterprise Module\"/>"
+msgid "<span class=\"fa fa-info-circle\" title=\"Scholaris Enterprise Module\"/>"
 msgstr "không"
 
 #. module: scholaris_core
@@ -256,7 +256,7 @@ msgid ""
 "                                                        feature to read books in Scholaris."
 msgstr ""
 "Thêm một thư viện kỹ thuật số\n"
-"                                                        Tính năng để đọc sách trong Openeducat."
+"                                                        Tính năng để đọc sách trong Scholaris."
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core

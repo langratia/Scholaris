@@ -41,8 +41,8 @@ msgstr ""
 
 #. module: scholaris_admission
 #: model_terms:ir.ui.view,arch_db:scholaris_admission.res_config_settings_view_user
-msgid "<span class=\"fa fa-info-circle\" title=\"Openeducat Enterprise Module\"/>"
-msgstr "<span class = \"Fa Fa-Info-cirle\" title = \"Modulo Enterprise OpenEDucat\"/>"
+msgid "<span class=\"fa fa-info-circle\" title=\"Scholaris Enterprise Module\"/>"
+msgstr "<span class = \"Fa Fa-Info-cirle\" title = \"Modulo Enterprise Scholaris\"/>"
 
 #. module: scholaris_admission
 #: model_terms:ir.ui.view,arch_db:scholaris_admission.report_admission_analysis

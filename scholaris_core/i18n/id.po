@@ -63,8 +63,8 @@ msgstr ""
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core
-msgid "<span class=\"fa fa-info-circle \" title=\"Openeducat Enterprise Module\"/>"
-msgstr "<span class=\"fa fa-info-circle \" title=\"Modul Perusahaan Openeducat\"/>"
+msgid "<span class=\"fa fa-info-circle \" title=\"Scholaris Enterprise Module\"/>"
+msgstr "<span class=\"fa fa-info-circle \" title=\"Modul Perusahaan Scholaris\"/>"
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core
@@ -75,8 +75,8 @@ msgstr "<span class=\"fa fa-info-circle\" title=\"Modul Masukan Siswa Scholaris\
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core
-msgid "<span class=\"fa fa-info-circle\" title=\"Openeducat Enterprise Module\"/>"
-msgstr "<span class=\"fa fa-info-circle\" title=\"Modul Perusahaan Openeducat\"/>"
+msgid "<span class=\"fa fa-info-circle\" title=\"Scholaris Enterprise Module\"/>"
+msgstr "<span class=\"fa fa-info-circle\" title=\"Modul Perusahaan Scholaris\"/>"
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.report_student_bonafide

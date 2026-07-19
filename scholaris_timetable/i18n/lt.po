@@ -126,7 +126,7 @@ msgstr ""
 
 #. module: scholaris_timetable
 #: model_terms:ir.ui.view,arch_db:scholaris_timetable.res_config_settings_view_form_timetable
-msgid "<span class=\"fa fa-info-circle\" title=\"Openeducat Enterprise Module\"/>"
+msgid "<span class=\"fa fa-info-circle\" title=\"Scholaris Enterprise Module\"/>"
 msgstr ""
 "<span class = \"fa fa-info-aplis\" title = \"atvereducat Enterprise "
 "modulis\"/>"

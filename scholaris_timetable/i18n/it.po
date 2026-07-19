@@ -126,8 +126,8 @@ msgstr ""
 
 #. module: scholaris_timetable
 #: model_terms:ir.ui.view,arch_db:scholaris_timetable.res_config_settings_view_form_timetable
-msgid "<span class=\"fa fa-info-circle\" title=\"Openeducat Enterprise Module\"/>"
-msgstr "<span class = \"Fa Fa-Info-cirle\" title = \"Modulo Enterprise OpenEDucat\"/>"
+msgid "<span class=\"fa fa-info-circle\" title=\"Scholaris Enterprise Module\"/>"
+msgstr "<span class = \"Fa Fa-Info-cirle\" title = \"Modulo Enterprise Scholaris\"/>"
 
 #. module: scholaris_timetable
 #: model_terms:ir.ui.view,arch_db:scholaris_timetable.report_timetable_teacher_generate

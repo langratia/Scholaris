@@ -58,7 +58,7 @@ msgstr ""
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core
-msgid "<span class=\"fa fa-info-circle \" title=\"Openeducat Enterprise Module\"/>"
+msgid "<span class=\"fa fa-info-circle \" title=\"Scholaris Enterprise Module\"/>"
 msgstr ""
 
 #. module: scholaris_core
@@ -70,7 +70,7 @@ msgstr ""
 
 #. module: scholaris_core
 #: model_terms:ir.ui.view,arch_db:scholaris_core.res_config_settings_view_form_core
-msgid "<span class=\"fa fa-info-circle\" title=\"Openeducat Enterprise Module\"/>"
+msgid "<span class=\"fa fa-info-circle\" title=\"Scholaris Enterprise Module\"/>"
 msgstr ""
 
 #. module: scholaris_core
