@@ -1,115 +1,107 @@
 # Scholaris Community Edition 🎓
 
-[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/scholaris/scholaris_erp.svg)](https://github.com/scholaris/scholaris_erp/stargazers)
+<p align="center">
+  <img src="scholaris_core/static/description/scholaris_core_banner.jpg" alt="Scholaris Banner" width="100%" style="border-radius: 8px; margin-bottom: 20px;"/>
+</p>
 
-## Introduction 🚀
-
-Scholaris is a powerful, feature-rich **Open Source Educational ERP** designed to streamline academic and administrative processes in educational institutions. Whether you’re managing admissions, academics, finance, or human resources, Scholaris provides an integrated platform that empowers your institution with flexibility and innovation. Join our community to transform education management and embrace the future of learning! 🌟
-
----
-
-## Table of Contents
-- [Features 🚀📚](#features-)
-- [Demo & Live Links 🌐](#demo--live-links-)
-- [Installation](#installation)
-- [Documentation 📖](#documentation-)
-- [Community & Support 🤝](#community--support-)
-- [Roadmap 🗺️](#roadmap-)
-- [License 📄](#license-)
-- [Contact 📞](#contact-)
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=for-the-badge" alt="License"/></a>
+  <a href="https://www.odoo.com"><img src="https://img.shields.io/badge/Odoo-18.0%20Community-purple?style=for-the-badge&logo=odoo&logoColor=white" alt="Odoo Framework"/></a>
+  <a href="https://www.postgresql.org"><img src="https://img.shields.io/badge/PostgreSQL-15-blue?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/></a>
+  <a href="https://www.docker.com"><img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker Setup"/></a>
+  <a href="https://python.org"><img src="https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Support"/></a>
+  <a href="https://pre-commit.com/"><img src="https://img.shields.io/badge/pre--commit-enabled-FF5F00?style=for-the-badge&logo=pre-commit&logoColor=white" alt="Pre-Commit"/></a>
+</p>
 
 ---
 
-## Features 🚀📚
+## 📖 About Scholaris
 
-Scholaris offers a comprehensive suite of features tailored for modern educational institutions:
+Scholaris is a comprehensive, enterprise-grade **Educational Resource Planning (ERP)** system built specifically for K-12 schools, colleges, academies, and universities. By integrating student lifecycles, administrative operations, billing, scheduling, and academic assessments, Scholaris eliminates data silos and reduces manual overhead for modern institutions.
 
-- **Admissions & Registration** 🎟️: Simplify enrollment and registration processes.
-- **Student Information Management** 👨‍🎓👩‍🎓: Manage student profiles, academic history, and personal details.
-- **Course & Batch Management** 📚: Organize courses, batches, and scheduling with ease.
-- **Examination Management** 📝: Streamline exam scheduling, evaluation, and result processing.
-- **Fee & Finance Management** 💰: Automate fee collection, invoicing, and financial reporting.
-- **Attendance & Timetable** ⏰: Keep track of attendance and manage class schedules efficiently.
-- **Library Management** 📖: Handle book lending, cataloging, and member management.
-- **Transport & Hostel Management** 🚍🏠: Oversee transportation logistics and hostel accommodations.
-- **Communication Tools** 📢: Enhance collaboration with integrated messaging and notifications.
-- **Reporting & Analytics** 📊: Generate insightful reports for data-driven decision-making.
-- **HR & Payroll Management** 👥: Manage staff records, payroll, and performance reviews.
-- **Customizable & Modular** 🔧: Adapt or extend modules to meet your institution’s unique needs.
-- **Secure & Scalable** 🔒: Robust security features ensure your data is protected while scaling with your growth.
-
-For a full list of features, please visit our [Features Page](https://scholaris.org/features) 😊
+### Who It Serves (Key Personas)
+*   **🏫 Administrators**: Orchestrate academic calendars, coordinate course enrollment registers, manage classroom asset allocation, and oversee financial invoice generation.
+*   **👨‍🏫 Faculty & Teachers**: Manage class schedules, track student attendance, assign homework/tasks, and publish grades/evaluation marks.
+*   **🧑‍🎓 Students**: Keep track of schedules, check out library books, complete assignments, view portal transcripts, and register for subjects.
+*   **👪 Parents**: Check academic progress, track attendance logs, look up fee details, and maintain active communication channels with the school administration.
 
 ---
 
-## Demo & Live Links 🌐
+## 🚀 Key Modules & Capabilities
 
-Experience Scholaris firsthand:
-- **Online Demo**: [Try our live demo](https://scholaris.org/demo) 🎥
-- **Official Website**: [Visit Scholaris.org](https://scholaris.org) 🌟
-- **Community Meetings & Webinars**:
-  - [Join our next community meeting](https://scholaris.org/meeting) 🤝
-  - [Register for upcoming webinars](https://webinars.scholaris.org/events) 🎤
+Scholaris uses a modular architecture where every module represents an independent layer of school operations:
 
----
-
-## Installation 🛠️
-
-- Follow these steps to set up Scholaris Community Edition (https://doc.scholaris.org/administration/install.html)
-
----
-
-## Documentation 📖
-
-Learn more about Scholaris:
-- **Documentation Portal**: [Scholaris Documentation](https://doc.scholaris.org/)
-- **User Guides**: Comprehensive guides to help you master the system quickly.
+*   **🏫 Core Academics**: Manage base configurations including Student & Faculty profiles, Courses, Batches, Subjects, and Departments ([scholaris_core](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_core)).
+*   **🎟️ Admissions Registry**: Streamline candidate application forms, review pipelines, and automatic portal user creations ([scholaris_admission](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_admission)).
+*   **💰 Finance & Billing**: Define structured installment schedules, manage discounts, and generate standard invoices directly through Odoo accounting ([scholaris_fees](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_fees)).
+*   **📅 Timetables & Sessions**: Define time slots, assign rooms to schedules, and prevent timing clashes ([scholaris_timetable](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_timetable)).
+*   **📝 Daily Attendance**: Generate session-wise student check-sheets to track present/absent logs ([scholaris_attendance](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_attendance)).
+*   **📚 Library Systems**: Issue and return books, configure queue reservations, manage library cards, and automate fine generation ([scholaris_library](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_library)).
+*   **📝 Exam Evaluations**: Schedule classroom tests, assign room tables, manage grading thresholds, and generate marksheet documents ([scholaris_exam](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_exam)).
+*   **📬 Assignment Posts**: Publish assignments, accept student uploads, and log grading marks ([scholaris_assignment](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_assignment)).
+*   **👥 Parents Portal**: Establish parent-child relational groups for easy portal observation ([scholaris_parent](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_parent)).
 
 ---
 
-## Community & Support 🤝
+## 🛠️ Technology Stack
 
-Join our active and vibrant community:
-- **Discussion Forum**: [Scholaris Forum](https://scholaris.org/forum)
-- **Issue Tracker**: Report bugs and request features on [GitHub Issues](https://github.com/scholaris/scholaris_erp/issues)
-- **Community Chat**: Connect with peers on our [Community Chat](https://community.scholaris.org)
-- **Social Media**:
-  - LinkedIN: [@Scholaris Company Page](https://www.linkedin.com/company/scholaris-inc/)
-  - Instagram: [@Scholaris Profile](https://www.instagram.com/scholaris)
-  - Twitter: [@Scholaris](https://twitter.com/scholaris)
-  - Facebook: [Scholaris Facebook Page](https://facebook.com/scholaris)
+*   **Server Framework**: Odoo 18.0 (Community Edition)
+*   **Database Management**: PostgreSQL 15
+*   **Application Logic**: Python 3.10+
+*   **Interface Templates**: Odoo OWL JS & XML templating Engine
+*   **Styles**: Vanilla SCSS (Odoo standard assets pipelines)
 
 ---
 
-## Roadmap 🗺️
+## ⚡ Quick Start (Local Setup)
 
-We’re continuously evolving! Here’s a glimpse of what’s coming:
-- **Enhanced Mobile Experience** 📱: Optimizing for a seamless mobile interface.
-- **New Modules** 🆕: Introducing additional modules based on community feedback.
-- **Performance Optimization** ⚡: Continuous improvements for faster and smoother operations.
-- **Extended Integrations** 🔗: More integrations with popular third-party services.
-- **User Experience Enhancements** 🎨: Regular UI/UX updates to make navigation even easier.
+Run the full stack locally in minutes using Docker.
 
-Stay tuned for future updates and contribute to shaping our roadmap!
+### Prerequisites
+Ensure your local machine has **Docker** and **Docker Compose** installed and running.
+
+### 1. Launch the Containers
+From the root of the project directory, run:
+```bash
+docker compose up -d
+```
+
+### 2. Configure Database & Login
+1. Navigate to **[http://localhost:8069](http://localhost:8069)** in your browser.
+2. Complete the initialization form:
+    *   **Database Name**: `scholaris_db`
+    *   **Admin Email & Password**: E.g. `admin` / `admin`
+    *   **Demo Data**: Check this box to load default subjects, courses, and students.
+3. Click **Create Database**.
+
+### 3. Install the Modules
+1. Navigate to the **Apps** menu from Odoo's top navigation bar.
+2. Clear the "Apps" filter from the search bar and search for **Scholaris**.
+3. Locate **Scholaris ERP** (`scholaris_erp`) and click **Activate** to install the entire suite.
 
 ---
 
-## License 📄
+## 📂 Repository Structure
+
+```text
+├── scholaris_core/         # Base student, faculty, course & department models
+├── scholaris_admission/    # Student application and admission register flows
+├── scholaris_fees/         # Invoicing integration and school fee structures
+├── scholaris_timetable/    # Academic session schedules and timing presets
+├── scholaris_attendance/   # Daily student registry check-sheets
+├── scholaris_classroom/    # Classroom and facility allocation mapping
+├── scholaris_facility/     # Asset inventory catalog
+├── scholaris_exam/         # Grading setups, room listings, and marksheet results
+├── scholaris_assignment/   # Assignments, deadlines, and online grading
+├── scholaris_library/      # Book registry and check-in/checkout rules
+├── scholaris_activity/     # Co-curricular events registry
+├── scholaris_parent/       # Parent/guardian profile links
+├── theme_web_scholaris/    # Custom web portal theme
+└── docker-compose.yml      # Local container configurations
+```
+
+---
+
+## 📄 License
 
 Scholaris is distributed under the **LGPL-3.0 License**. See the [LICENSE](LICENSE) file for more details.
-
----
-
-## Contact 📞
-
-Have questions or need support? Get in touch:
-- **Email**: [support@scholaris.org](mailto:support@scholaris.org)
-- **Forum**: [Scholaris Forum](https://scholaris.org/forum)
-- **Twitter**: [@Scholaris](https://twitter.com/scholaris)
-
----
-
-Thank you for choosing **Scholaris** – empowering educational institutions with open source technology. We appreciate your support and look forward to your contributions! 🙌
-
-*Happy Learning & Coding! 💻🎉*
