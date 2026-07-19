@@ -90,7 +90,7 @@
     ],
     'js': [],
     'images': [
-        'static/description/scholaris_core_banner.jpg',
+        'static/description/scholaris_core_banner.png',
     ],
     'installable': True,
     'auto_install': False,

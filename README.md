@@ -1,7 +1,7 @@
 # Scholaris Community Edition 🎓
 
 <p align="center">
-  <img src="scholaris_core/static/description/scholaris_core_banner.jpg" alt="Scholaris Banner" width="100%" style="border-radius: 8px; margin-bottom: 20px;"/>
+  <img src="scholaris_core/static/description/scholaris_core_banner.png" alt="Scholaris Banner" width="100%" style="border-radius: 8px; margin-bottom: 20px;"/>
 </p>
 
 <p align="center">
