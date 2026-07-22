@@ -29,6 +29,7 @@ import {
 } from './modules/core/api/coreApi';
 import { Outlet } from 'react-router-dom';
 import { StudentPortalProvider } from './modules/core/context/StudentPortalContext';
+import { ThemeProvider } from './shared/context/ThemeContext';
 import StudentPortalLayout from './modules/core/components/StudentPortalLayout';
 import StudentLoginGate from './modules/core/pages/StudentLoginGate';
 import StudentDashboard from './modules/core/pages/StudentDashboard';
@@ -88,9 +89,10 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <StudentPortalProvider>
-        <Routes>
+    <ThemeProvider>
+      <BrowserRouter>
+        <StudentPortalProvider>
+          <Routes>
           {/* Public Admissions Routes */}
           <Route element={<PublicApplyLayout />}>
             <Route path="/apply" element={<StudentApplyPage />} />
@@ -144,8 +146,9 @@ export default function App() {
             <FacultyPage faculty={faculty} departments={departments} onFacultyCreated={loadData} />
           } />
         </Route>
-        </Routes>
-      </StudentPortalProvider>
-    </BrowserRouter>
+          </Routes>
+        </StudentPortalProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }

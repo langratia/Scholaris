@@ -4,6 +4,7 @@ import { useStudentPortal } from '../context/StudentPortalContext';
 import {
   LayoutDashboard, Calendar, CreditCard, UserCheck, LogOut, GraduationCap, Award, FileText, BookOpen,
 } from 'lucide-react';
+import { useTheme } from '../../../shared/context/ThemeContext';
 
 const NAV = [
   { to: '/student', label: 'Dashboard', icon: LayoutDashboard, end: true },
@@ -17,6 +18,7 @@ const NAV = [
 
 export default function StudentPortalLayout() {
   const { student, logout } = useStudentPortal();
+  const config = useTheme();
 
   // Guard: redirect to login if no session
   if (!student) return <Navigate to="/student/login" replace />;
@@ -54,7 +56,7 @@ export default function StudentPortalLayout() {
             background: 'linear-gradient(to right, #fff, #94a3b8)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           }}>
-            Scholaris <span style={{ fontWeight: 400, fontSize: '0.85rem', opacity: 0.7 }}>Student</span>
+            {config.shortName || config.name} <span style={{ fontWeight: 400, fontSize: '0.85rem', opacity: 0.7 }}>Student</span>
           </span>
         </div>
 

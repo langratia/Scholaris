@@ -15,6 +15,7 @@ import {
   Home,
   Briefcase,
 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const navItems = [
   { id: 'dashboard',  label: 'Dashboard',  icon: LayoutDashboard, path: '/dashboard' },
@@ -37,18 +38,23 @@ const COMING_SOON_ITEMS = [
 ];
 
 export default function Sidebar() {
+  const config = useTheme();
+
+  // Filter navigation items based on institutionConfig.modules toggles
+  const activeNavItems = navItems.filter(item => config.modules?.[item.id] !== false);
+
   return (
     <aside className="sidebar">
       <div style={{ flex: 1 }}>
         {/* Brand */}
         <div className="brand-container">
           <div className="brand-logo">
-            <img src="/logo.png" alt="Scholaris Logo" />
+            <img src={config.logo || '/logo.png'} alt={`${config.name} Logo`} />
           </div>
           <div>
-            <div className="brand-title">Scholaris</div>
+            <div className="brand-title">{config.shortName || config.name}</div>
             <div style={{ fontSize: '0.65rem', color: 'var(--text-dim)', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '1px' }}>
-              Management Suite
+              {config.tagline || 'Management Suite'}
             </div>
           </div>
         </div>
@@ -59,7 +65,7 @@ export default function Sidebar() {
         </div>
 
         <nav className="nav-group">
-          {navItems.map((item) => {
+          {activeNavItems.map((item) => {
             const Icon = item.icon;
             return (
               <NavLink
