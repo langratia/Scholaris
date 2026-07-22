@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -39,4 +39,56 @@ model Faculty {
   departmentId Int
   department   Department @relation(fields: [departmentId], references: [id])
   createdAt    DateTime   @default(now())
+}
+
+// --- ADMISSIONS MODULE ---
+
+enum RegisterStatus {
+  DRAFT
+  CONFIRMED
+  GATHERING
+  PROCESSING
+  DONE
+}
+
+enum ApplicationStatus {
+  DRAFT
+  SUBMITTED
+  CONFIRMED
+  ADMISSION_CONFIRM
+  DONE
+  REJECTED
+  CANCELLED
+}
+
+model AdmissionRegister {
+  id           Int              @id @default(autoincrement())
+  name         String
+  startDate    DateTime
+  endDate      DateTime
+  minCapacity  Int              @default(0)
+  maxCapacity  Int
+  targetCourse String
+  status       RegisterStatus   @default(DRAFT)
+  applications Application[]
+  createdAt    DateTime         @default(now())
+}
+
+model Application {
+  id                  Int               @id @default(autoincrement())
+  applicationNumber   String            @unique
+  firstName           String
+  middleName          String?
+  lastName            String
+  birthDate           DateTime
+  email               String
+  phone               String
+  targetCourse        String
+  previousInstitution String?
+  previousCourse      String?
+  status              ApplicationStatus @default(DRAFT)
+  registerId          Int
+  register            AdmissionRegister @relation(fields: [registerId], references: [id])
+  enrolledStudentId   Int?
+  createdAt           DateTime          @default(now())
 }

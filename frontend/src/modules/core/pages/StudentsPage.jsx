@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Users, Mail } from 'lucide-react';
 import Header from '../../../shared/components/Header';
 import { createStudent } from '../api/coreApi';
 
@@ -82,7 +83,7 @@ export default function StudentsPage({ students, onStudentCreated }) {
       <div className="cards-grid">
         {students.length === 0 ? (
           <div className="empty-state" style={{ gridColumn: '1 / -1' }}>
-            <div className="empty-icon">👥</div>
+            <Users size={44} style={{ opacity: 0.35, marginBottom: '1rem', color: 'var(--primary)' }} />
             <h3>No Students Admitted Yet</h3>
             <p style={{ marginTop: '0.5rem', color: 'var(--text-dim)' }}>Use the form above to add your first student.</p>
           </div>
@@ -95,7 +96,7 @@ export default function StudentsPage({ students, onStudentCreated }) {
                   <span className="badge-tag">{student.grade}</span>
                 </div>
                 <div className="card-meta">
-                  📧 {student.email}
+                  <Mail size={13} /> {student.email}
                 </div>
               </div>
             </div>

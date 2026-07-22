@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Building2, Users } from 'lucide-react';
 import Header from '../../../shared/components/Header';
 import { createDepartment } from '../api/coreApi';
 
@@ -68,7 +69,7 @@ export default function DepartmentsPage({ departments, onDepartmentCreated }) {
       <div className="cards-grid">
         {departments.length === 0 ? (
           <div className="empty-state" style={{ gridColumn: '1 / -1' }}>
-            <div className="empty-icon">🏢</div>
+            <Building2 size={44} style={{ opacity: 0.35, marginBottom: '1rem', color: 'var(--primary)' }} />
             <h3>No Departments Defined</h3>
             <p style={{ marginTop: '0.5rem', color: 'var(--text-dim)' }}>Add a department to get started.</p>
           </div>
@@ -81,7 +82,7 @@ export default function DepartmentsPage({ departments, onDepartmentCreated }) {
                   <span className="badge-tag">{dept.code}</span>
                 </div>
                 <div className="card-meta">
-                  Faculty Count: {dept._count?.faculties || 0}
+                  <Users size={13} /> Faculty Count: {dept._count?.faculties || 0}
                 </div>
               </div>
             </div>

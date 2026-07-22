@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BookOpen, UserCheck } from 'lucide-react';
 import Header from '../../../shared/components/Header';
 import { createCourse } from '../api/coreApi';
 
@@ -82,7 +83,7 @@ export default function CoursesPage({ courses, onCourseCreated }) {
       <div className="cards-grid">
         {courses.length === 0 ? (
           <div className="empty-state" style={{ gridColumn: '1 / -1' }}>
-            <div className="empty-icon">📚</div>
+            <BookOpen size={44} style={{ opacity: 0.35, marginBottom: '1rem', color: 'var(--primary)' }} />
             <h3>No Courses Created Yet</h3>
             <p style={{ marginTop: '0.5rem', color: 'var(--text-dim)' }}>Use the form above to add your first course.</p>
           </div>
@@ -95,7 +96,7 @@ export default function CoursesPage({ courses, onCourseCreated }) {
                   <span className="badge-tag">{course.code}</span>
                 </div>
                 <div className="card-meta">
-                  👨‍🏫 Instructor: {course.instructor}
+                  <UserCheck size={13} /> Instructor: {course.instructor}
                 </div>
               </div>
             </div>

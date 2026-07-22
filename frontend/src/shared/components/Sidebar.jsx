@@ -1,14 +1,24 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import {
+  LayoutDashboard,
+  Users,
+  BookOpen,
+  Building2,
+  GraduationCap,
+  ClipboardList,
+} from 'lucide-react';
 
-export default function Sidebar({ currentView, setCurrentView }) {
-  const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-    { id: 'students', label: 'Students', icon: '👥' },
-    { id: 'courses', label: 'Courses', icon: '📚' },
-    { id: 'departments', label: 'Departments', icon: '🏢' },
-    { id: 'faculty', label: 'Faculty', icon: '👨‍🏫' },
-  ];
+const navItems = [
+  { id: 'dashboard',  label: 'Dashboard',  icon: LayoutDashboard, path: '/dashboard' },
+  { id: 'admissions', label: 'Admissions',  icon: ClipboardList,   path: '/admissions' },
+  { id: 'students',   label: 'Students',    icon: Users,           path: '/students' },
+  { id: 'courses',    label: 'Courses',     icon: BookOpen,        path: '/courses' },
+  { id: 'departments',label: 'Departments', icon: Building2,       path: '/departments' },
+  { id: 'faculty',    label: 'Faculty',     icon: GraduationCap,   path: '/faculty' },
+];
 
+export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div>
@@ -20,16 +30,19 @@ export default function Sidebar({ currentView, setCurrentView }) {
         </div>
 
         <nav className="nav-group">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              className={`nav-link ${currentView === item.id ? 'active' : ''}`}
-              onClick={() => setCurrentView(item.id)}
-            >
-              <span className="nav-icon">{item.icon}</span>
-              <span>{item.label}</span>
-            </button>
-          ))}
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <NavLink
+                key={item.id}
+                to={item.path}
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
+                <Icon size={18} className="nav-icon" strokeWidth={1.75} />
+                <span>{item.label}</span>
+              </NavLink>
+            );
+          })}
         </nav>
       </div>
 

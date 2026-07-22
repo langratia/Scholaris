@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GraduationCap, Mail } from 'lucide-react';
 import Header from '../../../shared/components/Header';
 import { createFaculty } from '../api/coreApi';
 
@@ -89,7 +90,7 @@ export default function FacultyPage({ faculty, departments, onFacultyCreated }) 
       <div className="cards-grid">
         {faculty.length === 0 ? (
           <div className="empty-state" style={{ gridColumn: '1 / -1' }}>
-            <div className="empty-icon">👨‍🏫</div>
+            <GraduationCap size={44} style={{ opacity: 0.35, marginBottom: '1rem', color: 'var(--primary)' }} />
             <h3>No Faculty Registered</h3>
             <p style={{ marginTop: '0.5rem', color: 'var(--text-dim)' }}>Register a new faculty member to see them listed.</p>
           </div>
@@ -106,7 +107,7 @@ export default function FacultyPage({ faculty, departments, onFacultyCreated }) 
                   </span>
                 </div>
                 <div className="card-meta" style={{ marginTop: '0.75rem' }}>
-                  📧 {member.email}
+                  <Mail size={13} /> {member.email}
                 </div>
               </div>
             </div>

@@ -1,11 +1,21 @@
-const prisma = require('../../config/db');
+const {
+  StudentService,
+  CourseService,
+  DepartmentService,
+  FacultyService,
+} = require('./core.service');
+
+const {
+  studentSchema,
+  courseSchema,
+  departmentSchema,
+  facultySchema,
+} = require('./core.schema');
 
 // --- STUDENTS ---
 const getStudents = async (req, res, next) => {
   try {
-    const students = await prisma.student.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
+    const students = await StudentService.getAll();
     res.json(students);
   } catch (error) {
     next(error);
@@ -14,21 +24,19 @@ const getStudents = async (req, res, next) => {
 
 const createStudent = async (req, res, next) => {
   try {
-    const { name, email, grade } = req.body;
-    if (!name || !email || !grade) {
-      return res.status(400).json({ error: 'Name, email, and grade are required' });
-    }
+    const validData = studentSchema.parse(req.body);
 
-    const existing = await prisma.student.findUnique({ where: { email } });
+    const existing = await StudentService.getByEmail(validData.email);
     if (existing) {
       return res.status(400).json({ error: 'Email already registered' });
     }
 
-    const student = await prisma.student.create({
-      data: { name, email, grade },
-    });
+    const student = await StudentService.create(validData);
     res.status(201).json(student);
   } catch (error) {
+    if (error.name === 'ZodError') {
+      return res.status(400).json({ error: error.errors.map(e => e.message).join(', ') });
+    }
     next(error);
   }
 };
@@ -36,9 +44,7 @@ const createStudent = async (req, res, next) => {
 // --- COURSES ---
 const getCourses = async (req, res, next) => {
   try {
-    const courses = await prisma.course.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
+    const courses = await CourseService.getAll();
     res.json(courses);
   } catch (error) {
     next(error);
@@ -47,21 +53,19 @@ const getCourses = async (req, res, next) => {
 
 const createCourse = async (req, res, next) => {
   try {
-    const { title, code, instructor } = req.body;
-    if (!title || !code || !instructor) {
-      return res.status(400).json({ error: 'Title, code, and instructor are required' });
-    }
+    const validData = courseSchema.parse(req.body);
 
-    const existing = await prisma.course.findUnique({ where: { code } });
+    const existing = await CourseService.getByCode(validData.code);
     if (existing) {
       return res.status(400).json({ error: 'Course code already exists' });
     }
 
-    const course = await prisma.course.create({
-      data: { title, code, instructor },
-    });
+    const course = await CourseService.create(validData);
     res.status(201).json(course);
   } catch (error) {
+    if (error.name === 'ZodError') {
+      return res.status(400).json({ error: error.errors.map(e => e.message).join(', ') });
+    }
     next(error);
   }
 };
@@ -69,14 +73,7 @@ const createCourse = async (req, res, next) => {
 // --- DEPARTMENTS ---
 const getDepartments = async (req, res, next) => {
   try {
-    const departments = await prisma.department.findMany({
-      include: {
-        _count: {
-          select: { faculties: true },
-        },
-      },
-      orderBy: { name: 'asc' },
-    });
+    const departments = await DepartmentService.getAll();
     res.json(departments);
   } catch (error) {
     next(error);
@@ -85,21 +82,19 @@ const getDepartments = async (req, res, next) => {
 
 const createDepartment = async (req, res, next) => {
   try {
-    const { name, code } = req.body;
-    if (!name || !code) {
-      return res.status(400).json({ error: 'Name and code are required' });
-    }
+    const validData = departmentSchema.parse(req.body);
 
-    const existing = await prisma.department.findUnique({ where: { code } });
+    const existing = await DepartmentService.getByCode(validData.code);
     if (existing) {
       return res.status(400).json({ error: 'Department code already exists' });
     }
 
-    const department = await prisma.department.create({
-      data: { name, code },
-    });
+    const department = await DepartmentService.create(validData);
     res.status(201).json(department);
   } catch (error) {
+    if (error.name === 'ZodError') {
+      return res.status(400).json({ error: error.errors.map(e => e.message).join(', ') });
+    }
     next(error);
   }
 };
@@ -107,12 +102,7 @@ const createDepartment = async (req, res, next) => {
 // --- FACULTY ---
 const getFaculty = async (req, res, next) => {
   try {
-    const faculty = await prisma.faculty.findMany({
-      include: {
-        department: true,
-      },
-      orderBy: { lastName: 'asc' },
-    });
+    const faculty = await FacultyService.getAll();
     res.json(faculty);
   } catch (error) {
     next(error);
@@ -121,29 +111,19 @@ const getFaculty = async (req, res, next) => {
 
 const createFaculty = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, departmentId } = req.body;
-    if (!firstName || !lastName || !email || !departmentId) {
-      return res.status(400).json({ error: 'All faculty fields are required' });
-    }
+    const validData = facultySchema.parse(req.body);
 
-    const existing = await prisma.faculty.findUnique({ where: { email } });
+    const existing = await FacultyService.getByEmail(validData.email);
     if (existing) {
       return res.status(400).json({ error: 'Email already registered' });
     }
 
-    const faculty = await prisma.faculty.create({
-      data: {
-        firstName,
-        lastName,
-        email,
-        departmentId: parseInt(departmentId, 10),
-      },
-      include: {
-        department: true,
-      },
-    });
+    const faculty = await FacultyService.create(validData);
     res.status(201).json(faculty);
   } catch (error) {
+    if (error.name === 'ZodError') {
+      return res.status(400).json({ error: error.errors.map(e => e.message).join(', ') });
+    }
     next(error);
   }
 };
