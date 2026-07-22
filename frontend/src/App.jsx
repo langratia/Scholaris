@@ -23,6 +23,13 @@ import {
   fetchFaculty,
 } from './modules/core/api/coreApi';
 import { Outlet } from 'react-router-dom';
+import { StudentPortalProvider } from './modules/core/context/StudentPortalContext';
+import StudentPortalLayout from './modules/core/components/StudentPortalLayout';
+import StudentLoginGate from './modules/core/pages/StudentLoginGate';
+import StudentDashboard from './modules/core/pages/StudentDashboard';
+import StudentSchedulePage from './modules/core/pages/StudentSchedulePage';
+import StudentBillingPage from './modules/core/pages/StudentBillingPage';
+import StudentAttendancePage from './modules/core/pages/StudentAttendancePage';
 
 const AdminLayout = ({ children, loading }) => (
   <div className="app-layout">
@@ -75,12 +82,22 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Public Routes */}
-        <Route element={<PublicApplyLayout />}>
-          <Route path="/apply" element={<StudentApplyPage />} />
-          <Route path="/apply/status" element={<ApplicationStatusPage />} />
-        </Route>
+      <StudentPortalProvider>
+        <Routes>
+          {/* Public Admissions Routes */}
+          <Route element={<PublicApplyLayout />}>
+            <Route path="/apply" element={<StudentApplyPage />} />
+            <Route path="/apply/status" element={<ApplicationStatusPage />} />
+          </Route>
+
+          {/* Student Portal Routes */}
+          <Route path="/student/login" element={<StudentLoginGate />} />
+          <Route element={<StudentPortalLayout />}>
+            <Route path="/student" element={<StudentDashboard />} />
+            <Route path="/student/schedule" element={<StudentSchedulePage />} />
+            <Route path="/student/billing" element={<StudentBillingPage />} />
+            <Route path="/student/attendance" element={<StudentAttendancePage />} />
+          </Route>
 
         {/* Admin Routes */}
         <Route element={<AdminLayout loading={loading} />}>
@@ -113,7 +130,8 @@ export default function App() {
             <FacultyPage faculty={faculty} departments={departments} onFacultyCreated={loadData} />
           } />
         </Route>
-      </Routes>
+        </Routes>
+      </StudentPortalProvider>
     </BrowserRouter>
   );
 }

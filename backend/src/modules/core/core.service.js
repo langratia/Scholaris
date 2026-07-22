@@ -4,6 +4,37 @@ const StudentService = {
   getAll: () => prisma.student.findMany({ orderBy: { createdAt: 'desc' } }),
   getByEmail: (email) => prisma.student.findUnique({ where: { email } }),
   create: (data) => prisma.student.create({ data }),
+
+  getProfileByEmail: (email) => prisma.student.findUnique({
+    where: { email },
+    include: {
+      intakeBatch: {
+        include: {
+          course: true,
+          sessions: {
+            include: {
+              subject: true,
+              classroom: true,
+              faculty: true,
+            },
+            orderBy: { startDatetime: 'asc' },
+          },
+        },
+      },
+      studentFees: {
+        include: { feeTerm: { include: { installments: true } } },
+        orderBy: { createdAt: 'desc' },
+      },
+      attendanceLines: {
+        include: {
+          sheet: {
+            include: { course: true, faculty: true },
+          },
+        },
+        orderBy: { sheet: { date: 'desc' } },
+      },
+    },
+  }),
 };
 
 const CourseService = {

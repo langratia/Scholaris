@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   getStudents,
   createStudent,
+  getStudentProfile,
   getCourses,
   createCourse,
   getDepartments,
@@ -18,6 +19,7 @@ const {
 // Students routes
 router.get('/students', getStudents);
 router.post('/students', createStudent);
+router.get('/students/profile/:email', getStudentProfile);
 
 // Courses routes
 router.get('/courses', getCourses);

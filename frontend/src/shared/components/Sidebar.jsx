@@ -83,6 +83,14 @@ export default function Sidebar() {
           </div>
         ))}
       </div>
+      {/* Student Portal quick link */}
+      <div style={{ margin: '0 0.5rem 0.75rem', padding: '0.75rem 1rem', borderRadius: '12px', background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.15)' }}>
+        <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--accent-bright-blue)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.35rem' }}>Student Access</div>
+        <a href="/student/login" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+          <GraduationCap size={13} />
+          Open Student Portal ↗
+        </a>
+      </div>
 
       {/* User badge */}
       <div className="user-badge">

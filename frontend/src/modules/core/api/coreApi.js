@@ -47,3 +47,7 @@ export function fetchSubjects() {
 export function createSubject(data) {
   return request('/core/subjects', { method: 'POST', body: data });
 }
+
+export function fetchStudentProfile(email) {
+  return request(`/core/students/profile/${encodeURIComponent(email)}`);
+}

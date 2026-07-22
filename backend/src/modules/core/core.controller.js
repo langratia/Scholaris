@@ -45,6 +45,21 @@ const createStudent = async (req, res, next) => {
   }
 };
 
+const getStudentProfile = async (req, res, next) => {
+  try {
+    const { email } = req.params;
+    const profile = await StudentService.getProfileByEmail(
+      decodeURIComponent(email)
+    );
+    if (!profile) {
+      return res.status(404).json({ error: 'No student found with that email address' });
+    }
+    res.json(profile);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // --- COURSES ---
 const getCourses = async (req, res, next) => {
   try {
@@ -189,6 +204,7 @@ const createSubject = async (req, res, next) => {
 module.exports = {
   getStudents,
   createStudent,
+  getStudentProfile,
   getCourses,
   createCourse,
   getDepartments,
@@ -200,3 +216,4 @@ module.exports = {
   getSubjects,
   createSubject,
 };
+

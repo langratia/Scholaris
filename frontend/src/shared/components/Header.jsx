@@ -3,16 +3,18 @@ import { useLocation } from 'react-router-dom';
 import { Bell, Search } from 'lucide-react';
 
 const PAGE_META = {
-  '/dashboard':   { title: 'Institutional Dashboard', subtitle: 'System overview and live metrics' },
-  '/admissions':  { title: 'Admissions Registry',     subtitle: 'Campaigns, applications & enrolment pipeline' },
-  '/finance':     { title: 'Finance Registry',        subtitle: 'Student billing, invoices and payment collection' },
-  '/finance/terms':{ title: 'Fee Terms Setup',        subtitle: 'Define fee structures and installment percentages' },
-  '/students':    { title: 'Student Registry',         subtitle: 'Enrolled students and academic profiles' },
-  '/courses':     { title: 'Course Catalog',           subtitle: 'Academic courses and instructor assignments' },
-  '/departments': { title: 'Departments',              subtitle: 'Institutional academic departments' },
-  '/faculty':     { title: 'Faculty Directory',        subtitle: 'Teaching staff and department assignments' },
-  '/timetables':  { title: 'Timetables & Sessions',   subtitle: 'Academic scheduling, period timing & conflict prevention' },
-  '/attendance':  { title: 'Daily Attendance',         subtitle: 'Classroom check-in registers & attendance tracking' },
+  '/dashboard':              { title: 'Institutional Dashboard',   subtitle: 'System overview and live metrics' },
+  '/admissions':             { title: 'Admissions Overview',       subtitle: 'Campaigns, applications & enrolment pipeline' },
+  '/admissions/registers':   { title: 'Admission Registers',       subtitle: 'Create and manage intake cycle registers' },
+  '/admissions/applications':{ title: 'Application Review',        subtitle: 'Process and approve incoming applications' },
+  '/finance':                { title: 'Finance Registry',          subtitle: 'Student billing, invoices and payment collection' },
+  '/finance/terms':          { title: 'Fee Terms Setup',           subtitle: 'Define fee structures and installment percentages' },
+  '/students':               { title: 'Student Registry',          subtitle: 'Enrolled students and academic profiles' },
+  '/courses':                { title: 'Course Catalog',            subtitle: 'Academic courses and instructor assignments' },
+  '/departments':            { title: 'Departments',               subtitle: 'Institutional academic departments' },
+  '/faculty':                { title: 'Faculty Directory',         subtitle: 'Teaching staff and department assignments' },
+  '/timetables':             { title: 'Timetables & Sessions',     subtitle: 'Academic scheduling, period timing & conflict prevention' },
+  '/attendance':             { title: 'Daily Attendance',          subtitle: 'Classroom check-in registers & attendance tracking' },
 };
 
 export default function Header({ title, subtitle, actions }) {
