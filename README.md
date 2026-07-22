@@ -1,107 +1,127 @@
-# Scholaris Community Edition 🎓
+# Scholaris Modern Web Suite 🎓
 
-<p align="center">
-  <img src="scholaris_core/static/description/scholaris_core_banner.png" alt="Scholaris Banner" width="100%" style="border-radius: 8px; margin-bottom: 20px;"/>
-</p>
-
-<p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=for-the-badge" alt="License"/></a>
-  <a href="https://www.odoo.com"><img src="https://img.shields.io/badge/Odoo-18.0%20Community-purple?style=for-the-badge&logo=odoo&logoColor=white" alt="Odoo Framework"/></a>
-  <a href="https://www.postgresql.org"><img src="https://img.shields.io/badge/PostgreSQL-15-blue?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/></a>
-  <a href="https://www.docker.com"><img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker Setup"/></a>
-  <a href="https://python.org"><img src="https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Support"/></a>
-  <a href="https://pre-commit.com/"><img src="https://img.shields.io/badge/pre--commit-enabled-FF5F00?style=for-the-badge&logo=pre-commit&logoColor=white" alt="Pre-Commit"/></a>
-</p>
-
----
-
-## 📖 About Scholaris
-
-Scholaris is a comprehensive, enterprise-grade **Educational Resource Planning (ERP)** system built specifically for K-12 schools, colleges, academies, and universities. By integrating student lifecycles, administrative operations, billing, scheduling, and academic assessments, Scholaris eliminates data silos and reduces manual overhead for modern institutions.
-
-### Who It Serves (Key Personas)
-*   **🏫 Administrators**: Orchestrate academic calendars, coordinate course enrollment registers, manage classroom asset allocation, and oversee financial invoice generation.
-*   **👨‍🏫 Faculty & Teachers**: Manage class schedules, track student attendance, assign homework/tasks, and publish grades/evaluation marks.
-*   **🧑‍🎓 Students**: Keep track of schedules, check out library books, complete assignments, view portal transcripts, and register for subjects.
-*   **👪 Parents**: Check academic progress, track attendance logs, look up fee details, and maintain active communication channels with the school administration.
-
----
-
-## 🚀 Key Modules & Capabilities
-
-Scholaris uses a modular architecture where every module represents an independent layer of school operations:
-
-*   **🏫 Core Academics**: Manage base configurations including Student & Faculty profiles, Courses, Batches, Subjects, and Departments ([scholaris_core](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_core)).
-*   **🎟️ Admissions Registry**: Streamline candidate application forms, review pipelines, and automatic portal user creations ([scholaris_admission](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_admission)).
-*   **💰 Finance & Billing**: Define structured installment schedules, manage discounts, and generate standard invoices directly through Odoo accounting ([scholaris_fees](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_fees)).
-*   **📅 Timetables & Sessions**: Define time slots, assign rooms to schedules, and prevent timing clashes ([scholaris_timetable](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_timetable)).
-*   **📝 Daily Attendance**: Generate session-wise student check-sheets to track present/absent logs ([scholaris_attendance](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_attendance)).
-*   **📚 Library Systems**: Issue and return books, configure queue reservations, manage library cards, and automate fine generation ([scholaris_library](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_library)).
-*   **📝 Exam Evaluations**: Schedule classroom tests, assign room tables, manage grading thresholds, and generate marksheet documents ([scholaris_exam](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_exam)).
-*   **📬 Assignment Posts**: Publish assignments, accept student uploads, and log grading marks ([scholaris_assignment](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_assignment)).
-*   **👥 Parents Portal**: Establish parent-child relational groups for easy portal observation ([scholaris_parent](file:///home/a-n/Documents/BUSINESS/school/scholaris/scholaris_parent)).
+Scholaris is a premium, custom educational management platform engineered to replace generic school ERPs with a tailored, modern web experience. By moving away from Odoo, Scholaris provides 100% control over the user experience, lightning-fast rendering, and a robust relational architecture.
 
 ---
 
 ## 🛠️ Technology Stack
-
-*   **Server Framework**: Odoo 18.0 (Community Edition)
-*   **Database Management**: PostgreSQL 15
-*   **Application Logic**: Python 3.10+
-*   **Interface Templates**: Odoo OWL JS & XML templating Engine
-*   **Styles**: Vanilla SCSS (Odoo standard assets pipelines)
+* **Frontend**: React (Vite) + Vanilla CSS (Premium Glassmorphism Design System)
+* **Backend**: Node.js (Express) + Prisma ORM
+* **Database**: PostgreSQL (Docker-orchestrated)
+* **Authentication**: Token-based Sessions (manual backend routes)
 
 ---
 
-## ⚡ Quick Start (Local Setup)
-
-Run the full stack locally in minutes using Docker.
-
-### Prerequisites
-Ensure your local machine has **Docker** and **Docker Compose** installed and running.
-
-### 1. Launch the Containers
-From the root of the project directory, run:
-```bash
-docker compose up -d
-```
-
-### 2. Configure Database & Login
-1. Navigate to **[http://localhost:8069](http://localhost:8069)** in your browser.
-2. Complete the initialization form:
-    *   **Database Name**: `scholaris_db`
-    *   **Admin Email & Password**: E.g. `admin` / `admin`
-    *   **Demo Data**: Check this box to load default subjects, courses, and students.
-3. Click **Create Database**.
-
-### 3. Install the Modules
-1. Navigate to the **Apps** menu from Odoo's top navigation bar.
-2. Clear the "Apps" filter from the search bar and search for **Scholaris**.
-3. Locate **Scholaris ERP** (`scholaris_erp`) and click **Activate** to install the entire suite.
+## 🗺️ Master Blueprint & Functional Requirements
+The following specifications have been compiled from the legacy Odoo implementation. They serve as the functional blueprint for Scholaris, which will be built out phase-by-phase.
 
 ---
 
-## 📂 Repository Structure
-
-```text
-├── scholaris_core/         # Base student, faculty, course & department models
-├── scholaris_admission/    # Student application and admission register flows
-├── scholaris_fees/         # Invoicing integration and school fee structures
-├── scholaris_timetable/    # Academic session schedules and timing presets
-├── scholaris_attendance/   # Daily student registry check-sheets
-├── scholaris_classroom/    # Classroom and facility allocation mapping
-├── scholaris_facility/     # Asset inventory catalog
-├── scholaris_exam/         # Grading setups, room listings, and marksheet results
-├── scholaris_assignment/   # Assignments, deadlines, and online grading
-├── scholaris_library/      # Book registry and check-in/checkout rules
-├── scholaris_activity/     # Co-curricular events registry
-├── scholaris_parent/       # Parent/guardian profile links
-├── theme_web_scholaris/    # Custom web portal theme
-└── docker-compose.yml      # Local container configurations
-```
+### 1. Core Academics
+The foundation of the entire system, managing basic records of the institution:
+* **Students**:
+  * Fields: First Name, Middle Name, Last Name, Registration Number (`gr_no`), Birth Date, Gender, Blood Group, Nationality, ID Card Number, Visa Details, Emergency Contact, and active Portal User account.
+  * Student Course Details: Links a student to a Course, Intake Batch, Roll Number, Term, active/finished status, and a list of enrolled subjects.
+* **Faculty**:
+  * Fields: First Name, Middle Name, Last Name, Birth Date, Blood Group, Gender, Nationality, ID Card Number, Main Department, Allowed Departments, and associated HR Employee record.
+  * Taught Subjects: Many-to-many relationship mapping courses/subjects the faculty is certified to teach.
+* **Courses**:
+  * Fields: Course Name, Course Code, Parent/Child Hierarchical Course relationships, Evaluation Type (Normal, GPA, CWA, CCE), Minimum/Maximum Unit Loads, Department, and related Subjects.
+* **Intake Batches**:
+  * Fields: Code, Name, Start Date, End Date, Course Reference, and active status.
+* **Subjects**:
+  * Fields: Name, Code, Grade Weightage, Type (Theory, Practical, Both, Other), Subject Type (Compulsory, Elective), and Department.
+* **Subject Registration**:
+  * Workflow: Enables students to apply for elective courses within unit load constraints. Includes a state workflow: `Draft` ➔ `Submitted` ➔ `Approved` (automatically appends selected electives to student's course record) or `Rejected`.
+* **Academic Years & Terms**:
+  * Structure: Configures academic cycles (e.g. Years, Semesters, or Quarters) with start/end bounds and term structures.
+* **Departments**:
+  * Structure: Hierarchical departments (Name, Code, Parent Department).
 
 ---
 
-## 📄 License
+### 2. Admissions Registry
+Manages prospective applicants and the enrollment pipeline:
+* **Admission Registers**:
+  * Fields: Campaign Name, Start/End Dates, Minimum/Maximum capacities, Minimum Age Criteria, target Course/Program, and associated Application Fee.
+  * States: `Draft` ➔ `Confirmed` ➔ `Application Gathering` (accepting applicants) ➔ `Admission Process` (reviewing candidates) ➔ `Done`.
+* **Applications**:
+  * Fields: Application Number, First/Middle/Last Name, Birth Date, Target Course/Batch, Contact Info (Street, City, Zip, Phone, Email, Country), Gender, Previous Education History (Institute, Course, Result), Family Income, Application Fee Term, and enrollment status.
+  * Workflow: `Draft` ➔ `Submitted` ➔ `Confirmed` ➔ `Admission Confirm` (generates the `Student` record and links details automatically) ➔ `Done` or `Rejected` / `Cancelled`.
 
-Scholaris is distributed under the **LGPL-3.0 License**. See the [LICENSE](LICENSE) file for more details.
+---
+
+### 3. Finance & Fees
+Handles billing installment plans and invoices:
+* **Fees Terms**:
+  * Structure: Installment structures divided by days (e.g., net 30) or specific dates. Percentages across terms must sum to exactly 100%.
+  * Fees Elements: Breaks down the fee lines into categories (e.g., Tuition, Library Fee, Lab Fee, Sports Fee).
+* **Student Fees Details**:
+  * Fields: Student Reference, Course, Batch, Amount, Installment Term Line, Discount (%), calculated Total, Payment Submission Date, and Billing State (`Draft` ➔ `Invoice Created` ➔ `Cancelled`).
+  * Workflow: Generates line-item invoice records calculating the fractional split of installment fees across respective accounts.
+
+---
+
+### 4. Timetables & Sessions
+Schedules academic periods and prevents scheduling resource conflicts:
+* **Periods (Timings)**:
+  * Fields: Name, Hour/Minute (AM/PM), Duration (hours), and Sequence.
+* **Sessions**:
+  * Fields: Session Title, Course, Batch, Subject, Assigned Faculty, Classroom/Room, Start Datetime, End Datetime, and state (`Draft` ➔ `Confirmed` ➔ `Done` ➔ `Cancelled`).
+  * Constraints: Prevents booking overlaps for:
+    * Faculty (same faculty cannot teach two classes at once).
+    * Classrooms (same room cannot host two sessions at once).
+    * Batches (a student intake batch cannot attend two sessions at once).
+
+---
+
+### 5. Daily Attendance
+Manages student check-in lists:
+* **Attendance Sheets**:
+  * Fields: Sheet Code, Date, Register Reference, Course, Batch, Session link, and Supervisor Faculty.
+  * States: `Draft` ➔ `Attendance Start` (enables check sheets) ➔ `Attendance Taken` (locked check sheet) ➔ `Cancelled`.
+* **Attendance Lines**:
+  * Fields: Student Reference, Date, Present/Absent-Excused/Absent-Unexcused/Late status, remark field, and optional custom Attendance Types. Toggling present/absent/late automatically updates associated flags.
+
+---
+
+### 6. Exam Evaluations
+Manages student test scheduling and grading marksheets:
+* **Exams**:
+  * Fields: Exam Name, Code, Session, Subject, Course, Batch, Start/End time, Total Marks, Passing Marks, and Responsible Faculty.
+  * States: `Draft` ➔ `Scheduled` ➔ `Held` ➔ `Result Updated` ➔ `Done`.
+  * Constraints: Prevents exam session timing overlap.
+* **Exam Attendees**:
+  * Fields: Student, Status (Present/Absent), Marks, and Exam Room.
+  * Validation: Present student marks must be between 0 and Total Marks. Absent student marks are automatically forced to 0.
+* **Marksheet Registers**:
+  * Fields: Exam Session, Generated Date, Author, Result Template, Total Pass, Total Fail, and state (`Draft` ➔ `Validated` ➔ `Cancelled`). Holds individual sheet results for validating grading boundaries.
+
+---
+
+### 7. Assignment Posts
+Manages homework task workflows:
+* **Assignments**:
+  * Fields: Title, Description, Course, Batch, Subject, Issued Date, Submission Date (Deadline), Max Points/Marks, Assigned Faculty, and publishing state (`Draft` ➔ `Published` ➔ `Finished` ➔ `Cancelled`).
+* **Submissions**:
+  * Fields: Student, Submission Date, description text/response, state (`Draft` ➔ `Submitted` ➔ `Rejected` ➔ `Change Required` ➔ `Accepted`), Marks awarded, and Reviewer feedback.
+
+---
+
+### 8. Library Management
+Cataloging, reservation, and checkout system:
+* **Media & Units**:
+  * Catalog: Media titles, Authors, Publishers, ISBN/ISSN, Media Type, and tags.
+  * Physical Copies: Media Units tracked by individual barcodes and status (`Available`, `Issued`, `Reserved`, `Lost`).
+* **Library Cards**:
+  * Rules: Card type mappings detailing borrowing limits (e.g., maximum borrowable items and duration limits per student or faculty user).
+* **Media Movements**:
+  * Details: Borrower (Student/Faculty), Card details, Copy Barcode, Issued Date, Due Date, Actual Return Date, and status (`Available` ➔ `Reserved` ➔ `Issued` ➔ `Returned`).
+  * Fines: Automatically calculates penalty fees for late returns based on overdue days.
+
+---
+
+### 9. Supporting Modules
+* **Parent Portal**: Connects parent contacts to student profiles with relationship tags (Father, Mother, Guardian).
+* **Classroom Allocation**: Manages classroom capacities (seating size) and registers mapped room facilities (projectors, lab kits, desks).
+* **Co-curricular Activities**: Logs co-curricular activities and athletic records linking students, dates, supervisor faculty, and activity details.
