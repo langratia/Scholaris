@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   Users,
@@ -10,6 +10,10 @@ import {
   DollarSign,
   Calendar,
   UserCheck,
+  Award,
+  FileText,
+  Home,
+  Briefcase,
 } from 'lucide-react';
 
 const navItems = [
@@ -18,10 +22,18 @@ const navItems = [
   { id: 'finance',    label: 'Finance',     icon: DollarSign,      path: '/finance' },
   { id: 'timetables', label: 'Timetables', icon: Calendar,        path: '/timetables' },
   { id: 'attendance', label: 'Attendance', icon: UserCheck,       path: '/attendance' },
+  { id: 'exams',      label: 'Exams',      icon: Award,           path: '/exams' },
+  { id: 'assignments',label: 'Assignments',icon: FileText,        path: '/assignments' },
+  { id: 'library',    label: 'Library',    icon: BookOpen,        path: '/library' },
+  { id: 'hr',         label: 'HR',         icon: Briefcase,       path: '/hr' },
   { id: 'students',   label: 'Students',    icon: Users,           path: '/students' },
   { id: 'courses',    label: 'Courses',     icon: BookOpen,        path: '/courses' },
   { id: 'departments',label: 'Departments', icon: Building2,       path: '/departments' },
   { id: 'faculty',    label: 'Faculty',     icon: GraduationCap,   path: '/faculty' },
+];
+
+const COMING_SOON_ITEMS = [
+  { id: 'hostel', label: 'Hostel', icon: Home },
 ];
 
 export default function Sidebar() {
@@ -69,8 +81,8 @@ export default function Sidebar() {
         <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--text-dim)', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '0 0.75rem', marginBottom: '0.5rem' }}>
           Coming Soon
         </div>
-        {['Exams', 'Assignment Posts', 'Library'].map((label) => (
-          <div key={label} style={{
+        {COMING_SOON_ITEMS.map((item) => (
+          <div key={item.id} style={{
             display: 'flex', alignItems: 'center', gap: '0.9rem',
             padding: '0.65rem 1.1rem', borderRadius: '10px',
             color: 'var(--text-dim)', fontSize: '0.88rem', opacity: 0.6,
@@ -79,10 +91,11 @@ export default function Sidebar() {
             <span style={{ width: 17, height: 17, borderRadius: '4px', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.55rem', color: 'var(--text-dim)', border: '1px solid rgba(255,255,255,0.07)' }}>
               🔒
             </span>
-            {label}
+            {item.label}
           </div>
         ))}
       </div>
+
       {/* Student Portal quick link */}
       <div style={{ margin: '0 0.5rem 0.75rem', padding: '0.75rem 1rem', borderRadius: '12px', background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.15)' }}>
         <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--accent-bright-blue)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.35rem' }}>Student Access</div>

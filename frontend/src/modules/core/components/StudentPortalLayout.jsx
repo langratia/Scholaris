@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { useStudentPortal } from '../context/StudentPortalContext';
 import {
-  LayoutDashboard, Calendar, CreditCard, UserCheck, LogOut, GraduationCap,
+  LayoutDashboard, Calendar, CreditCard, UserCheck, LogOut, GraduationCap, Award, FileText, BookOpen,
 } from 'lucide-react';
 
 const NAV = [
@@ -10,6 +10,9 @@ const NAV = [
   { to: '/student/schedule', label: 'Schedule', icon: Calendar },
   { to: '/student/billing', label: 'Billing', icon: CreditCard },
   { to: '/student/attendance', label: 'Attendance', icon: UserCheck },
+  { to: '/student/assignments', label: 'Assignments', icon: FileText },
+  { to: '/student/library', label: 'Library', icon: BookOpen },
+  { to: '/student/results', label: 'Results', icon: Award },
 ];
 
 export default function StudentPortalLayout() {

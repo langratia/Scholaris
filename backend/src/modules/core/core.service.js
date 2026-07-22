@@ -4,6 +4,8 @@ const StudentService = {
   getAll: () => prisma.student.findMany({ orderBy: { createdAt: 'desc' } }),
   getByEmail: (email) => prisma.student.findUnique({ where: { email } }),
   create: (data) => prisma.student.create({ data }),
+  update: (id, data) => prisma.student.update({ where: { id: parseInt(id, 10) }, data }),
+  delete: (id) => prisma.student.delete({ where: { id: parseInt(id, 10) } }),
 
   getProfileByEmail: (email) => prisma.student.findUnique({
     where: { email },
@@ -33,6 +35,36 @@ const StudentService = {
         },
         orderBy: { sheet: { date: 'desc' } },
       },
+      examResults: {
+        include: {
+          examSchedule: {
+            include: {
+              course: true,
+              subject: true,
+              batch: true,
+            },
+          },
+        },
+        orderBy: { examSchedule: { date: 'desc' } },
+      },
+      assignmentSubmissions: {
+        include: {
+          assignment: {
+            include: {
+              course: true,
+              subject: true,
+              faculty: true,
+            },
+          },
+        },
+        orderBy: { submittedAt: 'desc' },
+      },
+      bookBorrows: {
+        include: {
+          book: true,
+        },
+        orderBy: { issuedAt: 'desc' },
+      },
     },
   }),
 };
@@ -41,6 +73,8 @@ const CourseService = {
   getAll: () => prisma.course.findMany({ orderBy: { createdAt: 'desc' } }),
   getByCode: (code) => prisma.course.findUnique({ where: { code } }),
   create: (data) => prisma.course.create({ data }),
+  update: (id, data) => prisma.course.update({ where: { id: parseInt(id, 10) }, data }),
+  delete: (id) => prisma.course.delete({ where: { id: parseInt(id, 10) } }),
 };
 
 const DepartmentService = {
@@ -50,6 +84,8 @@ const DepartmentService = {
   }),
   getByCode: (code) => prisma.department.findUnique({ where: { code } }),
   create: (data) => prisma.department.create({ data }),
+  update: (id, data) => prisma.department.update({ where: { id: parseInt(id, 10) }, data }),
+  delete: (id) => prisma.department.delete({ where: { id: parseInt(id, 10) } }),
 };
 
 const FacultyService = {
@@ -62,6 +98,12 @@ const FacultyService = {
     data,
     include: { department: true },
   }),
+  update: (id, data) => prisma.faculty.update({
+    where: { id: parseInt(id, 10) },
+    data,
+    include: { department: true },
+  }),
+  delete: (id) => prisma.faculty.delete({ where: { id: parseInt(id, 10) } }),
 };
 
 const BatchService = {

@@ -8,15 +8,18 @@ datasource db {
 }
 
 model Student {
-  id            Int              @id @default(autoincrement())
-  name          String
-  email         String           @unique
-  grade         String
-  intakeBatchId Int?
-  intakeBatch   IntakeBatch?     @relation(fields: [intakeBatchId], references: [id])
-  studentFees   StudentFee[]
+  id              Int              @id @default(autoincrement())
+  name            String
+  email           String           @unique
+  grade           String
+  intakeBatchId   Int?
+  intakeBatch     IntakeBatch?     @relation(fields: [intakeBatchId], references: [id])
+  studentFees     StudentFee[]
   attendanceLines AttendanceLine[]
-  createdAt     DateTime         @default(now())
+  examResults     ExamResult[]
+  assignmentSubmissions AssignmentSubmission[]
+  bookBorrows     BookBorrow[]
+  createdAt       DateTime         @default(now())
 }
 
 model Course {
@@ -28,16 +31,19 @@ model Course {
   subjects         Subject[]
   sessions         Session[]
   attendanceSheets AttendanceSheet[]
+  examSchedules    ExamSchedule[]
+  assignments      Assignment[]
   createdAt        DateTime          @default(now())
 }
 
 model Department {
-  id        Int       @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   name      String
-  code      String    @unique
+  code      String     @unique
   faculties Faculty[]
   subjects  Subject[]
-  createdAt DateTime  @default(now())
+  employees Employee[]
+  createdAt DateTime   @default(now())
 }
 
 model Faculty {
@@ -49,6 +55,7 @@ model Faculty {
   department       Department        @relation(fields: [departmentId], references: [id])
   sessions         Session[]
   attendanceSheets AttendanceSheet[]
+  assignments      Assignment[]
   createdAt        DateTime          @default(now())
 }
 
@@ -64,21 +71,25 @@ model IntakeBatch {
   students         Student[]
   sessions         Session[]
   attendanceSheets AttendanceSheet[]
+  examSchedules    ExamSchedule[]
+  assignments      Assignment[]
   createdAt        DateTime          @default(now())
 }
 
 model Subject {
-  id           Int       @id @default(autoincrement())
-  name         String
-  code         String    @unique
-  weightage    Float     @default(1.0)
-  type         String    @default("Theory")
-  courseId     Int
-  course       Course    @relation(fields: [courseId], references: [id])
-  departmentId Int?
-  department   Department? @relation(fields: [departmentId], references: [id])
-  sessions     Session[]
-  createdAt    DateTime  @default(now())
+  id            Int            @id @default(autoincrement())
+  name          String
+  code          String         @unique
+  weightage     Float          @default(1.0)
+  type          String         @default("Theory")
+  courseId      Int
+  course        Course         @relation(fields: [courseId], references: [id])
+  departmentId  Int?
+  department    Department?    @relation(fields: [departmentId], references: [id])
+  sessions      Session[]
+  examSchedules ExamSchedule[]
+  assignments   Assignment[]
+  createdAt     DateTime       @default(now())
 }
 
 model Classroom {
@@ -272,3 +283,152 @@ model AttendanceLine {
   remark    String?
   createdAt DateTime         @default(now())
 }
+
+// --- EXAMS & GRADES MODULE ---
+
+enum ExamStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum ExamType {
+  MIDTERM
+  FINAL
+  QUIZ
+  ASSIGNMENT
+  PRACTICAL
+}
+
+model ExamSchedule {
+  id        Int          @id @default(autoincrement())
+  code      String       @unique
+  title     String
+  type      ExamType     @default(FINAL)
+  courseId  Int
+  course    Course       @relation(fields: [courseId], references: [id])
+  batchId   Int
+  batch     IntakeBatch  @relation(fields: [batchId], references: [id])
+  subjectId Int
+  subject   Subject      @relation(fields: [subjectId], references: [id])
+  maxMarks  Float        @default(100.0)
+  passMarks Float        @default(40.0)
+  date      DateTime
+  startTime String
+  endTime   String
+  venue     String?
+  status    ExamStatus   @default(SCHEDULED)
+  results   ExamResult[]
+  createdAt DateTime     @default(now())
+}
+
+model ExamResult {
+  id             Int          @id @default(autoincrement())
+  examScheduleId Int
+  examSchedule   ExamSchedule @relation(fields: [examScheduleId], references: [id], onDelete: Cascade)
+  studentId      Int
+  student        Student      @relation(fields: [studentId], references: [id])
+  marksObtained  Float
+  grade          String?
+  remarks        String?
+  createdAt      DateTime     @default(now())
+}
+
+// --- ASSIGNMENTS MODULE ---
+
+model Assignment {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  dueDate     DateTime
+  maxMarks    Float     @default(100.0)
+  courseId    Int
+  course      Course    @relation(fields: [courseId], references: [id])
+  batchId     Int
+  batch       IntakeBatch @relation(fields: [batchId], references: [id])
+  subjectId   Int
+  subject     Subject   @relation(fields: [subjectId], references: [id])
+  facultyId   Int
+  faculty     Faculty   @relation(fields: [facultyId], references: [id])
+  status      String    @default("ACTIVE") // ACTIVE, CLOSED
+  submissions AssignmentSubmission[]
+  createdAt   DateTime  @default(now())
+}
+
+model AssignmentSubmission {
+  id            Int        @id @default(autoincrement())
+  assignmentId  Int
+  assignment    Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  studentId     Int
+  student       Student    @relation(fields: [studentId], references: [id])
+  content       String?    
+  fileUrl       String?    
+  submittedAt   DateTime   @default(now())
+  marksObtained Float?
+  remarks       String?
+  status        String     @default("SUBMITTED") // SUBMITTED, GRADED, LATE
+}
+
+// --- LIBRARY MODULE ---
+
+model Book {
+  id              Int          @id @default(autoincrement())
+  isbn            String       @unique
+  title           String
+  author          String
+  publisher       String?
+  category        String       @default("General")
+  copies          Int          @default(1)
+  availableCopies Int          @default(1)
+  location        String?      // e.g. Shelf A-3
+  createdAt       DateTime     @default(now())
+  borrows         BookBorrow[]
+}
+
+model BookBorrow {
+  id          Int       @id @default(autoincrement())
+  bookId      Int
+  book        Book      @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  studentId   Int
+  student     Student   @relation(fields: [studentId], references: [id])
+  issuedAt    DateTime  @default(now())
+  dueDate     DateTime
+  returnedAt  DateTime?
+  status      String    @default("ISSUED") // ISSUED, RETURNED, OVERDUE
+  fineAmount  Float     @default(0.0)
+  remarks     String?
+}
+
+// --- HR MODULE ---
+
+model Employee {
+  id             Int            @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  email          String         @unique
+  phone          String?
+  role           String         // e.g. Accountant, Admin Clerk, Security, Janitor
+  employeeType   String         @default("NON_TEACHING") // TEACHING, NON_TEACHING
+  departmentId   Int?
+  department     Department?    @relation(fields: [departmentId], references: [id])
+  salary         Float          @default(0.0)
+  joinDate       DateTime       @default(now())
+  status         String         @default("ACTIVE") // ACTIVE, INACTIVE, TERMINATED
+  leaveRequests  LeaveRequest[]
+  createdAt      DateTime       @default(now())
+}
+
+model LeaveRequest {
+  id           Int       @id @default(autoincrement())
+  employeeId   Int
+  employee     Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  leaveType    String    @default("ANNUAL") // SICK, ANNUAL, UNPAID, MATERNITY, PATERNITY
+  startDate    DateTime
+  endDate      DateTime
+  reason       String?
+  status       String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  reviewedBy   String?
+  reviewedAt   DateTime?
+  createdAt    DateTime  @default(now())
+}
+

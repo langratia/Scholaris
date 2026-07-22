@@ -7,6 +7,10 @@ const admissionsRoutes = require('./modules/admissions/admissions.routes');
 const financeRoutes = require('./modules/finance/finance.routes');
 const timetablesRoutes = require('./modules/timetables/timetables.routes');
 const attendanceRoutes = require('./modules/attendance/attendance.routes');
+const examsRoutes = require('./modules/exams/exams.routes');
+const assignmentsRoutes = require('./modules/assignments/assignments.routes');
+const libraryRoutes = require('./modules/library/library.routes');
+const hrRoutes = require('./modules/hr/hr.routes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -22,6 +26,10 @@ app.use('/api/admissions', admissionsRoutes);
 app.use('/api/finance', financeRoutes);
 app.use('/api/timetables', timetablesRoutes);
 app.use('/api/attendance', attendanceRoutes);
+app.use('/api/exams', examsRoutes);
+app.use('/api/assignments', assignmentsRoutes);
+app.use('/api/library', libraryRoutes);
+app.use('/api/hr', hrRoutes);
 
 // Backward Compatibility / Top-level Domain Aliases
 app.use('/api', coreRoutes);

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Users, BookOpen, Building2, GraduationCap,
   ClipboardList, TrendingUp, Activity, ArrowUpRight,
-  CheckCircle, Zap,
+  CheckCircle, Zap, Award, DollarSign, UserCheck
 } from 'lucide-react';
 import Header from '../../shared/components/Header';
+import { fetchExamStats } from '../exams/api/examsApi';
 
 const METRIC_CARDS = [
   {
@@ -47,15 +48,23 @@ const METRIC_CARDS = [
 ];
 
 const QUICK_LINKS = [
+  { label: 'Schedule Exam',    icon: Award,         path: '/exams',       color: '#a78bfa' },
   { label: 'Open Admissions',  icon: ClipboardList, path: '/admissions',  color: '#29B5F7' },
+  { label: 'Finance & Fees',   icon: DollarSign,    path: '/finance',     color: '#34d399' },
+  { label: 'Take Attendance',  icon: UserCheck,     path: '/attendance',  color: '#fbbf24' },
   { label: 'Admit Student',    icon: Users,         path: '/students',    color: '#7465F3' },
   { label: 'Add Course',       icon: BookOpen,      path: '/courses',     color: '#10b981' },
-  { label: 'Register Faculty', icon: GraduationCap, path: '/faculty',     color: '#f59e0b' },
 ];
 
 export default function DashboardPage({ studentsCount, coursesCount, departmentsCount, facultyCount }) {
   const counts = { students: studentsCount, courses: coursesCount, departments: departmentsCount, faculty: facultyCount };
-  const total = studentsCount + coursesCount + departmentsCount + facultyCount;
+  const [examStats, setExamStats] = useState(null);
+
+  useEffect(() => {
+    fetchExamStats()
+      .then(data => setExamStats(data))
+      .catch(err => console.error('Error loading exam stats:', err));
+  }, []);
 
   return (
     <div className="animate-fade-in">
@@ -123,6 +132,28 @@ export default function DashboardPage({ studentsCount, coursesCount, departments
         })}
       </div>
 
+      {/* Dynamic Academic Insights Banner */}
+      {examStats && (
+        <div className="card" style={{ marginBottom: '1.5rem', background: 'linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.06))', border: '1px solid rgba(139,92,246,0.2)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'rgba(139,92,246,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Award size={22} color="#c084fc" />
+              </div>
+              <div>
+                <div style={{ fontSize: '0.78rem', color: '#c084fc', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Academic Performance</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'white' }}>
+                  Institutional Pass Rate: <strong style={{ color: '#34d399' }}>{examStats.passRate}%</strong> ({examStats.totalSchedules} exams scheduled)
+                </div>
+              </div>
+            </div>
+            <Link to="/exams" className="btn-secondary" style={{ padding: '0.45rem 1rem', fontSize: '0.85rem', textDecoration: 'none', color: '#c084fc', border: '1px solid rgba(139,92,246,0.3)' }}>
+              Manage Exams & Grades ↗
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* Quick Actions + System Status */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
 
@@ -165,15 +196,15 @@ export default function DashboardPage({ studentsCount, coursesCount, departments
         {/* System Status */}
         <div className="glass-panel" style={{ marginBottom: 0 }}>
           <h2 className="panel-title">
-            <Activity size={18} style={{ color: '#34d399' }} /> Platform Status
+            <Activity size={18} style={{ color: '#34d399' }} /> Platform Modules
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.5rem' }}>
             {[
-              { label: 'Frontend',      value: 'React 19 + Vite',           status: 'ok', color: '#34d399' },
-              { label: 'Backend API',   value: 'Node.js / Express',          status: 'ok', color: '#34d399' },
-              { label: 'Database',      value: 'PostgreSQL (Docker)',        status: 'ok', color: '#34d399' },
-              { label: 'ORM',           value: 'Prisma 5 + Zod Validation', status: 'ok', color: '#34d399' },
-              { label: 'Architecture',  value: 'Domain-Driven Modules',      status: 'ok', color: '#29B5F7' },
+              { label: 'Exams & Grading',  value: 'Active / Complete', status: 'ok', color: '#c084fc' },
+              { label: 'Daily Attendance', value: 'Active',            status: 'ok', color: '#34d399' },
+              { label: 'Finance & Invoicing', value: 'Active',         status: 'ok', color: '#34d399' },
+              { label: 'Timetables & Sessions', value: 'Active',      status: 'ok', color: '#34d399' },
+              { label: 'Admissions Pipeline', value: 'Active',        status: 'ok', color: '#29B5F7' },
             ].map((item) => (
               <div key={item.label} style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',

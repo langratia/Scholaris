@@ -16,6 +16,11 @@ import FinanceDashboard from './modules/finance/pages/FinanceDashboard';
 import FeeTermsPage from './modules/finance/pages/FeeTermsPage';
 import TimetablesPage from './modules/timetables/pages/TimetablesPage';
 import AttendancePage from './modules/attendance/pages/AttendancePage';
+import ExamsPage from './modules/exams/pages/ExamsPage';
+import AssignmentsPage from './modules/assignments/pages/AssignmentsPage';
+import LibraryPage from './modules/library/pages/LibraryPage';
+import HRPage from './modules/hr/pages/HRPage';
+import StudentResultsPage from './modules/core/pages/StudentResultsPage';
 import {
   fetchStudents,
   fetchCourses,
@@ -30,6 +35,8 @@ import StudentDashboard from './modules/core/pages/StudentDashboard';
 import StudentSchedulePage from './modules/core/pages/StudentSchedulePage';
 import StudentBillingPage from './modules/core/pages/StudentBillingPage';
 import StudentAttendancePage from './modules/core/pages/StudentAttendancePage';
+import StudentAssignmentsPage from './modules/core/pages/StudentAssignmentsPage';
+import StudentLibraryPage from './modules/core/pages/StudentLibraryPage';
 
 const AdminLayout = ({ children, loading }) => (
   <div className="app-layout">
@@ -97,6 +104,9 @@ export default function App() {
             <Route path="/student/schedule" element={<StudentSchedulePage />} />
             <Route path="/student/billing" element={<StudentBillingPage />} />
             <Route path="/student/attendance" element={<StudentAttendancePage />} />
+            <Route path="/student/results" element={<StudentResultsPage />} />
+            <Route path="/student/assignments" element={<StudentAssignmentsPage />} />
+            <Route path="/student/library" element={<StudentLibraryPage />} />
           </Route>
 
         {/* Admin Routes */}
@@ -117,6 +127,10 @@ export default function App() {
           <Route path="/finance/terms" element={<FeeTermsPage />} />
           <Route path="/timetables" element={<TimetablesPage />} />
           <Route path="/attendance" element={<AttendancePage />} />
+          <Route path="/exams" element={<ExamsPage />} />
+          <Route path="/assignments" element={<AssignmentsPage />} />
+          <Route path="/library" element={<LibraryPage />} />
+          <Route path="/hr" element={<HRPage />} />
           <Route path="/students" element={
             <StudentsPage students={students} onStudentCreated={loadData} />
           } />
