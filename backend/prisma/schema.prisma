@@ -8,11 +8,12 @@ datasource db {
 }
 
 model Student {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  grade     String
-  createdAt DateTime @default(now())
+  id          Int          @id @default(autoincrement())
+  name        String
+  email       String       @unique
+  grade       String
+  studentFees StudentFee[]
+  createdAt   DateTime     @default(now())
 }
 
 model Course {
@@ -91,4 +92,50 @@ model Application {
   register            AdmissionRegister @relation(fields: [registerId], references: [id])
   enrolledStudentId   Int?
   createdAt           DateTime          @default(now())
+}
+
+// --- FINANCE & FEES MODULE ---
+
+enum FeeStatus {
+  DRAFT
+  INVOICE_CREATED
+  PAID
+  CANCELLED
+}
+
+model FeeTerm {
+  id           Int              @id @default(autoincrement())
+  name         String
+  code         String           @unique
+  description  String?
+  totalAmount  Float
+  installments FeeInstallment[]
+  studentFees  StudentFee[]
+  createdAt    DateTime         @default(now())
+}
+
+model FeeInstallment {
+  id         Int      @id @default(autoincrement())
+  name       String
+  percentage Float
+  dueDays    Int      @default(30)
+  feeTermId  Int
+  feeTerm    FeeTerm  @relation(fields: [feeTermId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+}
+
+model StudentFee {
+  id            Int        @id @default(autoincrement())
+  invoiceNumber String     @unique
+  studentId     Int
+  student       Student    @relation(fields: [studentId], references: [id])
+  feeTermId     Int
+  feeTerm       FeeTerm    @relation(fields: [feeTermId], references: [id])
+  grossAmount   Float
+  discount      Float      @default(0)
+  netAmount     Float
+  paidAmount    Float      @default(0)
+  dueDate       DateTime
+  status        FeeStatus  @default(DRAFT)
+  createdAt     DateTime   @default(now())
 }

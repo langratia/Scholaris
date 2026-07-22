@@ -5,6 +5,8 @@ import { Bell, Search } from 'lucide-react';
 const PAGE_META = {
   '/dashboard':   { title: 'Institutional Dashboard', subtitle: 'System overview and live metrics' },
   '/admissions':  { title: 'Admissions Registry',     subtitle: 'Campaigns, applications & enrolment pipeline' },
+  '/finance':     { title: 'Finance Registry',        subtitle: 'Student billing, invoices and payment collection' },
+  '/finance/terms':{ title: 'Fee Terms Setup',        subtitle: 'Define fee structures and installment percentages' },
   '/students':    { title: 'Student Registry',         subtitle: 'Enrolled students and academic profiles' },
   '/courses':     { title: 'Course Catalog',           subtitle: 'Academic courses and instructor assignments' },
   '/departments': { title: 'Departments',              subtitle: 'Institutional academic departments' },

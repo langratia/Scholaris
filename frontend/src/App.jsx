@@ -7,6 +7,8 @@ import CoursesPage from './modules/core/pages/CoursesPage';
 import DepartmentsPage from './modules/core/pages/DepartmentsPage';
 import FacultyPage from './modules/core/pages/FacultyPage';
 import AdmissionsPage from './modules/admissions/pages/AdmissionsPage';
+import FinanceDashboard from './modules/finance/pages/FinanceDashboard';
+import FeeTermsPage from './modules/finance/pages/FeeTermsPage';
 import {
   fetchStudents,
   fetchCourses,
@@ -70,6 +72,8 @@ export default function App() {
                 />
               } />
               <Route path="/admissions" element={<AdmissionsPage />} />
+              <Route path="/finance" element={<FinanceDashboard />} />
+              <Route path="/finance/terms" element={<FeeTermsPage />} />
               <Route path="/students" element={
                 <StudentsPage students={students} onStudentCreated={loadData} />
               } />
