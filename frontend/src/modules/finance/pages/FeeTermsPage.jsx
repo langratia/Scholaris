@@ -5,10 +5,6 @@ import {
   Plus,
   ArrowLeft,
   X,
-  Layers,
-  Percent,
-  DollarSign,
-  CheckCircle,
 } from 'lucide-react';
 import Header from '../../../shared/components/Header';
 import { fetchFeeTerms, createFeeTerm } from '../api/financeApi';
@@ -97,13 +93,12 @@ export default function FeeTermsPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="animate-fade-in">
-        <Header title="Fee Terms Setup" subtitle="Loading fee templates..." />
-      </div>
-    );
-  }
+  if (loading) return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '1.5rem' }}>
+      <div className="loading-spinner" />
+      <h3 style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>Loading fee templates...</h3>
+    </div>
+  );
 
   return (
     <div className="animate-fade-in">
