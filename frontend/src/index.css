@@ -43,6 +43,11 @@
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden; /* Scroll handled per-panel, prevents double scrollbars */
+}
+
 body {
   font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
   background-color: var(--bg-dark);
@@ -50,7 +55,6 @@ body {
   background-attachment: fixed;
   color: var(--text-main);
   min-height: 100vh;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -71,9 +75,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100vh;         /* Fills full height */
+  overflow-y: auto;      /* Sidebar itself scrolls if needed */
   position: sticky;
   top: 0;
-  height: 100vh;
+  flex-shrink: 0;
   z-index: 50;
 }
 
@@ -197,7 +203,8 @@ body {
 .main-wrapper {
   flex: 1;
   padding: 2.5rem 3.5rem;
-  overflow-y: auto;
+  overflow-y: auto;     /* This element scrolls, not body */
+  height: 100vh;        /* Fill full viewport height */
   max-width: 1400px;
 }
 
