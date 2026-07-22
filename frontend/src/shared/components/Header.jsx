@@ -11,6 +11,8 @@ const PAGE_META = {
   '/courses':     { title: 'Course Catalog',           subtitle: 'Academic courses and instructor assignments' },
   '/departments': { title: 'Departments',              subtitle: 'Institutional academic departments' },
   '/faculty':     { title: 'Faculty Directory',        subtitle: 'Teaching staff and department assignments' },
+  '/timetables':  { title: 'Timetables & Sessions',   subtitle: 'Academic scheduling, period timing & conflict prevention' },
+  '/attendance':  { title: 'Daily Attendance',         subtitle: 'Classroom check-in registers & attendance tracking' },
 };
 
 export default function Header({ title, subtitle, actions }) {

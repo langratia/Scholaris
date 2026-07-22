@@ -9,6 +9,10 @@ const {
   createDepartment,
   getFaculty,
   createFaculty,
+  getBatches,
+  createBatch,
+  getSubjects,
+  createSubject,
 } = require('./core.controller');
 
 // Students routes
@@ -26,5 +30,13 @@ router.post('/departments', createDepartment);
 // Faculty routes
 router.get('/faculty', getFaculty);
 router.post('/faculty', createFaculty);
+
+// Intake Batches routes
+router.get('/batches', getBatches);
+router.post('/batches', createBatch);
+
+// Subjects routes
+router.get('/subjects', getSubjects);
+router.post('/subjects', createSubject);
 
 module.exports = router;

@@ -24,9 +24,28 @@ const facultySchema = z.object({
   departmentId: z.union([z.string(), z.number()]).transform(val => parseInt(val, 10)),
 });
 
+const batchSchema = z.object({
+  name: z.string().min(1, "Batch name is required"),
+  code: z.string().min(1, "Batch code is required"),
+  startDate: z.string().min(1, "Start date is required"),
+  endDate: z.string().min(1, "End date is required"),
+  courseId: z.union([z.string(), z.number()]).transform(val => parseInt(val, 10)),
+});
+
+const subjectSchema = z.object({
+  name: z.string().min(1, "Subject name is required"),
+  code: z.string().min(1, "Subject code is required"),
+  weightage: z.union([z.string(), z.number()]).transform(val => parseFloat(val)).optional().default(1.0),
+  type: z.string().default("Theory"),
+  courseId: z.union([z.string(), z.number()]).transform(val => parseInt(val, 10)),
+  departmentId: z.union([z.string(), z.number()]).transform(val => parseInt(val, 10)).optional(),
+});
+
 module.exports = {
   studentSchema,
   courseSchema,
   departmentSchema,
   facultySchema,
+  batchSchema,
+  subjectSchema,
 };

@@ -6,15 +6,42 @@ import StudentsPage from './modules/core/pages/StudentsPage';
 import CoursesPage from './modules/core/pages/CoursesPage';
 import DepartmentsPage from './modules/core/pages/DepartmentsPage';
 import FacultyPage from './modules/core/pages/FacultyPage';
-import AdmissionsPage from './modules/admissions/pages/AdmissionsPage';
+import AdmissionsDashboard from './modules/admissions/pages/AdmissionsDashboard';
+import RegistersManagePage from './modules/admissions/pages/RegistersManagePage';
+import ApplicationsReviewPage from './modules/admissions/pages/ApplicationsReviewPage';
+import PublicApplyLayout from './modules/admissions/components/PublicApplyLayout';
+import StudentApplyPage from './modules/admissions/pages/StudentApplyPage';
+import ApplicationStatusPage from './modules/admissions/pages/ApplicationStatusPage';
 import FinanceDashboard from './modules/finance/pages/FinanceDashboard';
 import FeeTermsPage from './modules/finance/pages/FeeTermsPage';
+import TimetablesPage from './modules/timetables/pages/TimetablesPage';
+import AttendancePage from './modules/attendance/pages/AttendancePage';
 import {
   fetchStudents,
   fetchCourses,
   fetchDepartments,
   fetchFaculty,
 } from './modules/core/api/coreApi';
+import { Outlet } from 'react-router-dom';
+
+const AdminLayout = ({ children, loading }) => (
+  <div className="app-layout">
+    <Sidebar />
+    <main className="main-wrapper">
+      {loading ? (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '1.5rem' }}>
+          <div className="loading-spinner" />
+          <div style={{ textAlign: 'center' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.4rem' }}>Connecting to Scholaris...</h3>
+            <p style={{ color: 'var(--text-dim)', fontSize: '0.88rem' }}>Ensure PostgreSQL database is running via <code style={{ background: 'rgba(255,255,255,0.07)', padding: '0.1rem 0.4rem', borderRadius: '5px' }}>docker compose up -d</code></p>
+          </div>
+        </div>
+      ) : (
+        <Outlet />
+      )}
+    </main>
+  </div>
+);
 
 export default function App() {
   const [students, setStudents] = useState([]);
@@ -48,48 +75,45 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="app-layout">
-        <Sidebar />
+      <Routes>
+        {/* Public Routes */}
+        <Route element={<PublicApplyLayout />}>
+          <Route path="/apply" element={<StudentApplyPage />} />
+          <Route path="/apply/status" element={<ApplicationStatusPage />} />
+        </Route>
 
-        <main className="main-wrapper">
-          {loading ? (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '1.5rem' }}>
-              <div className="loading-spinner" />
-              <div style={{ textAlign: 'center' }}>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.4rem' }}>Connecting to Scholaris...</h3>
-                <p style={{ color: 'var(--text-dim)', fontSize: '0.88rem' }}>Ensure PostgreSQL database is running via <code style={{ background: 'rgba(255,255,255,0.07)', padding: '0.1rem 0.4rem', borderRadius: '5px' }}>docker compose up -d</code></p>
-              </div>
-            </div>
-          ) : (
-            <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={
-                <DashboardPage
-                  studentsCount={students.length}
-                  coursesCount={courses.length}
-                  departmentsCount={departments.length}
-                  facultyCount={faculty.length}
-                />
-              } />
-              <Route path="/admissions" element={<AdmissionsPage />} />
-              <Route path="/finance" element={<FinanceDashboard />} />
-              <Route path="/finance/terms" element={<FeeTermsPage />} />
-              <Route path="/students" element={
-                <StudentsPage students={students} onStudentCreated={loadData} />
-              } />
-              <Route path="/courses" element={
-                <CoursesPage courses={courses} onCourseCreated={loadData} />
-              } />
-              <Route path="/departments" element={
-                <DepartmentsPage departments={departments} onDepartmentCreated={loadData} />
-              } />
-              <Route path="/faculty" element={
-                <FacultyPage faculty={faculty} departments={departments} onFacultyCreated={loadData} />
-              } />
-            </Routes>
-          )}
-        </main>
-      </div>
+        {/* Admin Routes */}
+        <Route element={<AdminLayout loading={loading} />}>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={
+            <DashboardPage
+              studentsCount={students.length}
+              coursesCount={courses.length}
+              departmentsCount={departments.length}
+              facultyCount={faculty.length}
+            />
+          } />
+          <Route path="/admissions" element={<AdmissionsDashboard />} />
+          <Route path="/admissions/registers" element={<RegistersManagePage />} />
+          <Route path="/admissions/applications" element={<ApplicationsReviewPage />} />
+          <Route path="/finance" element={<FinanceDashboard />} />
+          <Route path="/finance/terms" element={<FeeTermsPage />} />
+          <Route path="/timetables" element={<TimetablesPage />} />
+          <Route path="/attendance" element={<AttendancePage />} />
+          <Route path="/students" element={
+            <StudentsPage students={students} onStudentCreated={loadData} />
+          } />
+          <Route path="/courses" element={
+            <CoursesPage courses={courses} onCourseCreated={loadData} />
+          } />
+          <Route path="/departments" element={
+            <DepartmentsPage departments={departments} onDepartmentCreated={loadData} />
+          } />
+          <Route path="/faculty" element={
+            <FacultyPage faculty={faculty} departments={departments} onFacultyCreated={loadData} />
+          } />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

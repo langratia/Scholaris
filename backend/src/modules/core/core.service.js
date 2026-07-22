@@ -33,9 +33,39 @@ const FacultyService = {
   }),
 };
 
+const BatchService = {
+  getAll: () => prisma.intakeBatch.findMany({
+    include: { course: true, _count: { select: { students: true } } },
+    orderBy: { createdAt: 'desc' },
+  }),
+  getByCode: (code) => prisma.intakeBatch.findUnique({ where: { code } }),
+  create: (data) => prisma.intakeBatch.create({
+    data: {
+      ...data,
+      startDate: new Date(data.startDate),
+      endDate: new Date(data.endDate),
+    },
+    include: { course: true },
+  }),
+};
+
+const SubjectService = {
+  getAll: () => prisma.subject.findMany({
+    include: { course: true, department: true },
+    orderBy: { name: 'asc' },
+  }),
+  getByCode: (code) => prisma.subject.findUnique({ where: { code } }),
+  create: (data) => prisma.subject.create({
+    data,
+    include: { course: true, department: true },
+  }),
+};
+
 module.exports = {
   StudentService,
   CourseService,
   DepartmentService,
   FacultyService,
+  BatchService,
+  SubjectService,
 };

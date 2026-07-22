@@ -10,3 +10,6 @@ export const fetchApplications = (registerId) =>
 export const createApplication = (data) => request('/admissions/applications', { method: 'POST', body: data });
 export const updateApplicationStatus = (id, status) =>
   request(`/admissions/applications/${id}/status`, { method: 'PATCH', body: { status } });
+
+export const checkApplicationStatus = (applicationNumber, email) =>
+  request('/admissions/applications/status', { method: 'POST', body: { applicationNumber, email } });

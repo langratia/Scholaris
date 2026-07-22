@@ -42,6 +42,19 @@ const ApplicationService = {
     return prisma.application.create({ data: { ...data, applicationNumber } });
   },
 
+  checkStatus: (applicationNumber, email) =>
+    prisma.application.findFirst({
+      where: { applicationNumber, email },
+      select: {
+        applicationNumber: true,
+        firstName: true,
+        lastName: true,
+        targetCourse: true,
+        status: true,
+        createdAt: true,
+      },
+    }),
+
   updateStatus: async (id, status) => {
     const application = await prisma.application.update({
       where: { id },

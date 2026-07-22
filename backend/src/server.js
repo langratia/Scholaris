@@ -5,6 +5,8 @@ const cors = require('cors');
 const coreRoutes = require('./modules/core/core.routes');
 const admissionsRoutes = require('./modules/admissions/admissions.routes');
 const financeRoutes = require('./modules/finance/finance.routes');
+const timetablesRoutes = require('./modules/timetables/timetables.routes');
+const attendanceRoutes = require('./modules/attendance/attendance.routes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -18,6 +20,8 @@ app.use(express.json());
 app.use('/api/core', coreRoutes);
 app.use('/api/admissions', admissionsRoutes);
 app.use('/api/finance', financeRoutes);
+app.use('/api/timetables', timetablesRoutes);
+app.use('/api/attendance', attendanceRoutes);
 
 // Backward Compatibility / Top-level Domain Aliases
 app.use('/api', coreRoutes);

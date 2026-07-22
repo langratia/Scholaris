@@ -8,12 +8,16 @@ import {
   GraduationCap,
   ClipboardList,
   DollarSign,
+  Calendar,
+  UserCheck,
 } from 'lucide-react';
 
 const navItems = [
   { id: 'dashboard',  label: 'Dashboard',  icon: LayoutDashboard, path: '/dashboard' },
   { id: 'admissions', label: 'Admissions',  icon: ClipboardList,   path: '/admissions' },
   { id: 'finance',    label: 'Finance',     icon: DollarSign,      path: '/finance' },
+  { id: 'timetables', label: 'Timetables', icon: Calendar,        path: '/timetables' },
+  { id: 'attendance', label: 'Attendance', icon: UserCheck,       path: '/attendance' },
   { id: 'students',   label: 'Students',    icon: Users,           path: '/students' },
   { id: 'courses',    label: 'Courses',     icon: BookOpen,        path: '/courses' },
   { id: 'departments',label: 'Departments', icon: Building2,       path: '/departments' },
@@ -65,7 +69,7 @@ export default function Sidebar() {
         <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--text-dim)', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '0 0.75rem', marginBottom: '0.5rem' }}>
           Coming Soon
         </div>
-        {['Timetables', 'Attendance', 'Exams', 'Library'].map((label) => (
+        {['Exams', 'Assignment Posts', 'Library'].map((label) => (
           <div key={label} style={{
             display: 'flex', alignItems: 'center', gap: '0.9rem',
             padding: '0.65rem 1.1rem', borderRadius: '10px',

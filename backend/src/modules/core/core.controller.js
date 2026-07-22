@@ -3,6 +3,8 @@ const {
   CourseService,
   DepartmentService,
   FacultyService,
+  BatchService,
+  SubjectService,
 } = require('./core.service');
 
 const {
@@ -10,6 +12,8 @@ const {
   courseSchema,
   departmentSchema,
   facultySchema,
+  batchSchema,
+  subjectSchema,
 } = require('./core.schema');
 
 // --- STUDENTS ---
@@ -128,6 +132,60 @@ const createFaculty = async (req, res, next) => {
   }
 };
 
+// --- INTAKE BATCHES ---
+const getBatches = async (req, res, next) => {
+  try {
+    const batches = await BatchService.getAll();
+    res.json(batches);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const createBatch = async (req, res, next) => {
+  try {
+    const validData = batchSchema.parse(req.body);
+    const existing = await BatchService.getByCode(validData.code);
+    if (existing) {
+      return res.status(400).json({ error: 'Batch code already exists' });
+    }
+    const batch = await BatchService.create(validData);
+    res.status(201).json(batch);
+  } catch (error) {
+    if (error.name === 'ZodError') {
+      return res.status(400).json({ error: error.errors.map(e => e.message).join(', ') });
+    }
+    next(error);
+  }
+};
+
+// --- SUBJECTS ---
+const getSubjects = async (req, res, next) => {
+  try {
+    const subjects = await SubjectService.getAll();
+    res.json(subjects);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const createSubject = async (req, res, next) => {
+  try {
+    const validData = subjectSchema.parse(req.body);
+    const existing = await SubjectService.getByCode(validData.code);
+    if (existing) {
+      return res.status(400).json({ error: 'Subject code already exists' });
+    }
+    const subject = await SubjectService.create(validData);
+    res.status(201).json(subject);
+  } catch (error) {
+    if (error.name === 'ZodError') {
+      return res.status(400).json({ error: error.errors.map(e => e.message).join(', ') });
+    }
+    next(error);
+  }
+};
+
 module.exports = {
   getStudents,
   createStudent,
@@ -137,4 +195,8 @@ module.exports = {
   createDepartment,
   getFaculty,
   createFaculty,
+  getBatches,
+  createBatch,
+  getSubjects,
+  createSubject,
 };

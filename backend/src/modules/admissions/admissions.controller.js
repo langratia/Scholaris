@@ -79,6 +79,22 @@ const updateApplicationStatus = async (req, res, next) => {
   }
 };
 
+const checkApplicationStatus = async (req, res, next) => {
+  try {
+    const { applicationNumber, email } = req.body;
+    if (!applicationNumber || !email) {
+      return res.status(400).json({ error: 'Application number and email are required' });
+    }
+    const status = await ApplicationService.checkStatus(applicationNumber, email);
+    if (!status) {
+      return res.status(404).json({ error: 'Application not found with those details' });
+    }
+    res.json(status);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getRegisters,
   createRegister,
@@ -86,4 +102,6 @@ module.exports = {
   getApplications,
   createApplication,
   updateApplicationStatus,
+  checkApplicationStatus,
 };
+
