@@ -51,10 +51,12 @@ export default function App() {
 
         <main className="main-wrapper">
           {loading ? (
-            <div className="empty-state" style={{ marginTop: '5rem' }}>
-              <div className="empty-icon">⏳</div>
-              <h3>Loading Scholaris System...</h3>
-              <p>Ensure your PostgreSQL database is running.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '1.5rem' }}>
+              <div className="loading-spinner" />
+              <div style={{ textAlign: 'center' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.4rem' }}>Connecting to Scholaris...</h3>
+                <p style={{ color: 'var(--text-dim)', fontSize: '0.88rem' }}>Ensure PostgreSQL database is running via <code style={{ background: 'rgba(255,255,255,0.07)', padding: '0.1rem 0.4rem', borderRadius: '5px' }}>docker compose up -d</code></p>
+              </div>
             </div>
           ) : (
             <Routes>
